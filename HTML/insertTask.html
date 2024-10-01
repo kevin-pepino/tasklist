@@ -10,12 +10,14 @@
         <button id="taskList" onclick="taskListRedirect()">Listado De Tareas</button>
     </div>
     <h1>Añadir Tarea</h1>
-    <form>
-        <label>Titulo</label>
-        <input type="text" placeholder="Titulo"/>
-        <label>Descripcion</label>
-        <input type="text" placeholder="Descripcion"/>
-        <input type="submit" value="Añadir" onclick="addTask()"/>
+    <form name="form">
+        <label>Titulo
+        <input name="title" type="text" placeholder="Titulo"/>
+        </label>
+        <label>Descripcion
+        <input name="desc" type="text" placeholder="Descripcion"/>
+        </label>
+        <input type="submit" value="Añadir" onclick="addTask()" onsubmit="location.href('../html/index.html')"/>
     </form>
     <script type="text/javascript" src="../Javascript/script.js"></script>
 </body>

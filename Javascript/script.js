@@ -2,10 +2,10 @@
 /* CREATED ON: 30/09/2024 */
 /**************************/
 /* AUTHORS:               */
-/*    Victor F.           */
-/*    Aaron F.            */
+/*    Victor Falcon       */
+/*    Aaron Fuentes       */
 /*    Xavier B.           */
-/*    Xavier R.           */
+/*    Xavier Ramirez      */
 /**************************/
 
 
@@ -15,7 +15,8 @@ const tasksHTML = document.getElementById('tasks');
 //LOCAL STORAGE REFERENCES
 const tasksLS = localStorage.getItem('tasks');
 
-//localStorage.setItem('tasks', ['one', 'two', 'three']); 
+//FOR HARD LOCAL STORAGE WIPE
+//localStorage.clear(); 
 
 //REDIRECTS
 function addTaskRedirect(){location.href = '../HTML/insertTask.html';}
@@ -31,10 +32,10 @@ try
     }
     else
     {
-        let ray = tasksLS.split(',');
-        for(i = 0; i < ray.length; i++)
+        let list = tasksLS.split(',');
+        for(i = 0; i < list.length; i++)
         {
-            tasksHTML.innerHTML += `<div id='task'>${ray[i]}</div>`;
+            tasksHTML.innerHTML += `<div id='task'>${list[i]}</div>`;
         }
     }
 }
@@ -46,5 +47,11 @@ catch
 //ADD TASK TO THE LIST
 function addTask()
 {
+    let list = [];
+    if(tasksLS != null){list = tasksLS.split(',');}
+    let title = document.forms['form']['title'].value;
+    let desc = document.forms['form']['desc'].value;
+    list.push([title, desc]);
+    localStorage.setItem('tasks', list);
     location.href = '../HTML/index.html';
 }
