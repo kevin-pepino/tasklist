@@ -24,8 +24,16 @@ function fullwipe()
 //REDIRECTS
 function addTaskRedirect(){location.href = '../HTML/insertTask.html';}
 function taskListRedirect(){location.href = '../HTML/index.html';}
-function editTaskRedirect(){location.href = '../HTML/editTask.html';}
-
+function editTaskRedirect(item)
+{
+    location.href = '../HTML/editTask.html';
+    document.getElementById('ctTitle').innerText = item.title;
+    document.getElementById('ctDate').innerText = item.datelimit;
+}
+if(location.href.split('/')[2] == 'index.html')
+{
+    console.log('ass');
+}
 //GENERATE LIST ON MAIN PAGE
 if(tasksLS == null)
 {
