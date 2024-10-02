@@ -29,7 +29,7 @@ function editTaskRedirect(){location.href = '../HTML/editTask.html';}
 //GENERATE LIST ON MAIN PAGE
 if(tasksLS == null)
 {
-    tasksHTML.innerHTML = `<p>No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button onclick="addTaskRedirect()">Añadir Tarea</button>`;
+    tasksHTML.innerHTML = `<p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button onclick="addTaskRedirect()">Añadir Tarea</button>`;
 }
 else
 {
@@ -51,9 +51,9 @@ else
             <p>${list[i].desc}</p>
             <p>${list[i].timestamp}</p>
             <p>${list[i].isFinished}</p>
-            <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
-            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
-            <button id="btn" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
+            <button id="fin" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
+            <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
+            <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
             <!--p>${list[i].id}</p-->
         </div>
         `;
