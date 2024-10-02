@@ -51,9 +51,9 @@ else
             <p>${list[i].desc}</p>
             <p>${list[i].timestamp}</p>
             <p>${list[i].isFinished}</p>
-            <button onclick="finishTask('${list[i].id}')">Finalizar</button>
-            <button onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
-            <button onclick="deleteTask('${list[i].id}')">Eliminar</button>
+            <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
+            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
+            <button id="btn" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
             <!--p>${list[i].id}</p-->
         </div>
         `;
