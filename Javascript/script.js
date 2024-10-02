@@ -39,12 +39,11 @@ if(tasksLS == null)
 else
 {
     let list = JSON.parse(tasksLS);
-    console.log(list);
+    //console.log(list);
     tasksHTML.innerHTML += `
         <div id='taskTitles' class='taskTitles'>
             <p>Titulo</p>
             <p>Fecha Limite</p>
-            <!--p>Creado</p-->
             <p>Estado</p>
         </div>
     `;
@@ -54,12 +53,10 @@ else
         <div id='task' class='task'>
             <p>${list[i].title}</p>
             <p>${list[i].datelimit}</p>
-            <!--p>${list[i].timestamp}</p-->
             <p>${list[i].isFinished}</p>
             <button id="fin" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
             <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
             <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
-            <!--p>${list[i].id}</p-->
         </div>
         `;
     }
