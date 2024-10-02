@@ -38,7 +38,7 @@ else
     tasksHTML.innerHTML += `
         <div id='taskTitles' class='taskTitles'>
             <p>Titulo</p>
-            <p>Descripcion</p>
+            <p>Fecha Limite</p>
             <p>Creado</p>
             <p>Estado</p>
         </div>
@@ -48,7 +48,7 @@ else
         tasksHTML.innerHTML += `
         <div id='task' class='task'>
             <p>${list[i].title}</p>
-            <p>${list[i].desc}</p>
+            <p>${list[i].datelimit}</p>
             <p>${list[i].timestamp}</p>
             <p>${list[i].isFinished}</p>
             <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
@@ -70,20 +70,23 @@ function addTask()
 
     let id = Math.floor(Math.random(0, 1) * 10000000000);       //RANDOMLY GENERATED ID
     let title = document.forms['form']['title'].value;          //TITLE OF THE TASK
-    let desc = document.forms['form']['desc'].value;            //DESCRIPTION
+    let datelimit = document.forms['form']['datelimit'].value;  //DATE TO FINISH
     let timestamp = today();                                    //TIME STAMP OF WHEN IT WAS CREATED
     let isFinished = false;                                     //TASK STATUS, SET AS INCOMPLETE (FALSE)
+
+    datelimit = reformatDate(datelimit);
+
     const item = {
         id: id,
         title: title, 
-        desc: desc, 
+        datelimit: datelimit, 
         timestamp: timestamp, 
         isFinished: isFinished
     };
     if(title == ''){alert('El titulo no puede estar vacío.');}
     /*if(repeatCheck(title))
     {
-        alert("The following title is already present on the list");
+        alert("Ya se ha introducido una tarea con este título.");
     }*/
     else
     {
@@ -93,6 +96,21 @@ function addTask()
     }
 }
 
+//CHANGE THE DISPLAY OF DATELIMIT
+function reformatDate(dl)
+{
+    let day = dl.split('-')[2];
+    if(day[0] == '0'){day = day[1];}
+
+    let month = dl.split('-')[1];
+    if(month[0] == '0'){month = month[1];}
+
+    let year = dl.split('-')[0];
+
+    return `${day}/${month}/${year}`;
+}
+
+//GET TODAY'S DATE FOR DATE OF CREATION
 function today()
 {
     let dt = new Date()
