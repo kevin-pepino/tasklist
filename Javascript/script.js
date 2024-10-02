@@ -56,9 +56,9 @@ else
             <p>${list[i].datelimit}</p>
             <!--p>${list[i].timestamp}</p-->
             <p>${list[i].isFinished}</p>
-            <button id="fin" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
-            <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
-            <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
+            <button id="fin" class="btn" onclick="finishTask('${list[i].id}')"></button>
+            <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
+            <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
             <!--p>${list[i].id}</p-->
         </div>
         `;
