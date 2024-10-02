@@ -80,18 +80,17 @@ function addTask()
         timestamp: timestamp, 
         isFinished: isFinished
     };
-    console.log('item');
-    //if(title == null){}
+    if(title == ''){alert('El titulo no puede estar vacío.');}
     /*if(repeatCheck(title))
     {
         alert("The following title is already present on the list");
-    }
+    }*/
     else
-    {*/
+    {
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
         location.href = '../HTML/index.html';
-    //}
+    }
 }
 
 function today()
