@@ -56,15 +56,16 @@ function loadList()
                 <p>${list[i].title}</p>
                 <p>${reformat(list[i].datelimit)}</p>
                 <p>${list[i].isFinished}</p>
-                <button id="fin" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
-                <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
-                <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
+                <button id="fin" class="btn" onclick="finishTask('${list[i].id}')"></button>
+                <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
+                <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
             </div>
             `;
         }
         tasksHTML.innerHTML += '</div>';
     }
 }
+
 
 //INSERTS ITEM INFO WHEN LOADING THE EDIT TASK
 function loadEdit()
@@ -152,10 +153,11 @@ function finishTask(id)
         if(element.id == id)
         {
             element.isFinished = true;
+            document.getElementById('fin').style.backgroundImage = "url('../img/FinTrue.png\')";
         }
     });
     localStorage.setItem('tasks', JSON.stringify(list));
-    location.reload();
+    //location.reload();
 }
 
 //UPDATE A TASK WITH NEW INFO
