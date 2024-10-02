@@ -30,10 +30,7 @@ function editTaskRedirect(item)
     document.getElementById('ctTitle').innerText = item.title;
     document.getElementById('ctDate').innerText = item.datelimit;
 }
-if(location.href.split('/')[2] == 'index.html')
-{
-    console.log('ass');
-}
+
 //GENERATE LIST ON MAIN PAGE
 if(tasksLS == null)
 {
@@ -46,7 +43,7 @@ else
     tasksHTML.innerHTML += `
         <div id='taskTitles' class='taskTitles'>
             <p>Titulo</p>
-            <p>Descripcion</p>
+            <p>Fecha Limite</p>
             <p>Creado</p>
             <p>Estado</p>
         </div>
@@ -56,11 +53,11 @@ else
         tasksHTML.innerHTML += `
         <div id='task' class='task'>
             <p>${list[i].title}</p>
-            <p>${list[i].desc}</p>
+            <p>${list[i].datelimit}</p>
             <p>${list[i].timestamp}</p>
             <p>${list[i].isFinished}</p>
             <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
-            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
+            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i]}')">Modificar</button>
             <button id="btn" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
             <!--p>${list[i].id}</p-->
         </div>
@@ -78,13 +75,16 @@ function addTask()
 
     let id = Math.floor(Math.random(0, 1) * 10000000000);       //RANDOMLY GENERATED ID
     let title = document.forms['form']['title'].value;          //TITLE OF THE TASK
-    let desc = document.forms['form']['desc'].value;            //DESCRIPTION
+    let datelimit = document.forms['form']['datelimit'].value;  //DATE LIMIT
     let timestamp = today();                                    //TIME STAMP OF WHEN IT WAS CREATED
     let isFinished = false;                                     //TASK STATUS, SET AS INCOMPLETE (FALSE)
+
+    datelimit = reformatDate(datelimit);
+
     const item = {
         id: id,
-        title: title, 
-        desc: desc, 
+        title: title,
+        datelimit: datelimit, 
         timestamp: timestamp, 
         isFinished: isFinished
     };
@@ -101,6 +101,10 @@ function addTask()
     }
 }
 
+function ass()
+{
+    console.log(document.forms['form']['datelimit'].value);
+}
 function today()
 {
     let dt = new Date()
@@ -131,6 +135,20 @@ function finishTask(id)
     });
     localStorage.setItem('tasks', JSON.stringify(list));
     location.reload();
+}
+
+//REFORMAT DATE
+function reformatDate(dl)
+{
+    let day = dl.split('-')[2];
+    if(day[0] == '0'){day = day[1];}
+
+    let month = dl.split('-')[1];
+    if(month[0] == '0'){month = month[1];}
+
+    let year = dl.split('-')[0];
+
+    return `${day}/${month}/${year}`;
 }
 
 function editTask(id)
