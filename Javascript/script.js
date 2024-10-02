@@ -24,7 +24,12 @@ function fullwipe()
 //REDIRECTS
 function addTaskRedirect(){location.href = '../HTML/insertTask.html';}
 function taskListRedirect(){location.href = '../HTML/index.html';}
-function editTaskRedirect(){location.href = '../HTML/editTask.html';}
+function editTaskRedirect(item)
+{
+    location.href = '../HTML/editTask.html';
+    document.getElementById('ctTitle').innerText = item.title;
+    document.getElementById('ctDate').innerText = item.datelimit;
+}
 
 //GENERATE LIST ON MAIN PAGE
 if(tasksLS == null)
@@ -39,7 +44,7 @@ else
         <div id='taskTitles' class='taskTitles'>
             <p>Titulo</p>
             <p>Fecha Limite</p>
-            <p>Creado</p>
+            <!--p>Creado</p-->
             <p>Estado</p>
         </div>
     `;
@@ -49,10 +54,10 @@ else
         <div id='task' class='task'>
             <p>${list[i].title}</p>
             <p>${list[i].datelimit}</p>
-            <p>${list[i].timestamp}</p>
+            <!--p>${list[i].timestamp}</p-->
             <p>${list[i].isFinished}</p>
             <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
-            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i].id}')">Modificar</button>
+            <button id="btn" class="btn" onclick="editTaskRedirect('${list[i]}')">Modificar</button>
             <button id="btn" class="btn" onclick="deleteTask('${list[i].id}')"><img src="../img/CuboBasura.png" width=50 height=50></button>
             <!--p>${list[i].id}</p-->
         </div>
@@ -70,7 +75,7 @@ function addTask()
 
     let id = Math.floor(Math.random(0, 1) * 10000000000);       //RANDOMLY GENERATED ID
     let title = document.forms['form']['title'].value;          //TITLE OF THE TASK
-    let datelimit = document.forms['form']['datelimit'].value;  //DATE TO FINISH
+    let datelimit = document.forms['form']['datelimit'].value;  //DATE LIMIT
     let timestamp = today();                                    //TIME STAMP OF WHEN IT WAS CREATED
     let isFinished = false;                                     //TASK STATUS, SET AS INCOMPLETE (FALSE)
 
@@ -78,7 +83,7 @@ function addTask()
 
     const item = {
         id: id,
-        title: title, 
+        title: title,
         datelimit: datelimit, 
         timestamp: timestamp, 
         isFinished: isFinished
@@ -141,6 +146,20 @@ function finishTask(id)
     });
     localStorage.setItem('tasks', JSON.stringify(list));
     location.reload();
+}
+
+//REFORMAT DATE FOR DISPLAY
+function reformatDate(dl)
+{
+    let day = dl.split('-')[2];
+    if(day[0] == '0'){day = day[1];}
+
+    let month = dl.split('-')[1];
+    if(month[0] == '0'){month = month[1];}
+
+    let year = dl.split('-')[0];
+
+    return `${day}/${month}/${year}`;
 }
 
 function editTask(id)
