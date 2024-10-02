@@ -44,7 +44,7 @@ else
         <div id='taskTitles' class='taskTitles'>
             <p>Titulo</p>
             <p>Fecha Limite</p>
-            <p>Creado</p>
+            <!--p>Creado</p-->
             <p>Estado</p>
         </div>
     `;
@@ -54,7 +54,7 @@ else
         <div id='task' class='task'>
             <p>${list[i].title}</p>
             <p>${list[i].datelimit}</p>
-            <p>${list[i].timestamp}</p>
+            <!--p>${list[i].timestamp}</p-->
             <p>${list[i].isFinished}</p>
             <button id="btn" class="btn" onclick="finishTask('${list[i].id}')">Finalizar</button>
             <button id="btn" class="btn" onclick="editTaskRedirect('${list[i]}')">Modificar</button>
@@ -101,10 +101,7 @@ function addTask()
     }
 }
 
-function ass()
-{
-    console.log(document.forms['form']['datelimit'].value);
-}
+//RETURNS TODAY'S DATE FOR THE TIMESTAMP
 function today()
 {
     let dt = new Date()
@@ -137,7 +134,7 @@ function finishTask(id)
     location.reload();
 }
 
-//REFORMAT DATE
+//REFORMAT DATE FOR DISPLAY
 function reformatDate(dl)
 {
     let day = dl.split('-')[2];
