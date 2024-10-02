@@ -7,5 +7,40 @@
 .task
 {
     display: grid;
-    grid-template-columns: 15% 15% 15% 15% 7% 7% 7%;
+    grid-template-columns: 15% 15% 15% 15% 15% 15% 10%;
+}
+body{
+    background-color: rgb(0, 0, 109);
+}
+h1,.txt,.taskTitles,.task{
+    color: white;
+    font-family: Arial;
+    
+}
+.taskTitles{
+    font-weight: bold;
+    font-size: 25px;   
+    text-align: center; 
+    
+    
+}
+.task{
+    border-style: solid;
+    text-align: center;
+    
+}
+h1{
+    font-size: 40px;
+}
+p{
+    word-wrap: break-word;
+}
+#fin{
+    background-color: greenyellow;
+}
+#mod{
+    background-color: aqua;
+}
+#sup{
+    background-color: red;
 }
