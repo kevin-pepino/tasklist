@@ -6,25 +6,17 @@
     <title>Edit Task</title>
     <link rel="stylesheet" href="../CSS/style.css"/>
 </head>
-<body>
+<body onload="loadEdit()">
     <div id="redirects" class="redirects">
         <button id="taskList" onclick="taskListRedirect()">Listado De Tareas</button>
     </div>
     <h1>Editar Tarea</h1>
-    <div id="current">
-        <p>Titulo Actual</p>
-        <p id="ctTitle"></p>
-        <p>Fecha Actual</p>
-        <p id="ctDate"></p>
-    </div>
-    <form>
+    <form name="form">
         <label>Nuevo Titulo</label>
-        <input id="title" type="text" placeholder="Titulo"/>
-        <br>
-        <label>Descripcion</label>
-        <input name="datelimit" type="date"/>
-        <br>
-        <input type="submit" value="Actualizar" onclick="addTask()"/>
+        <input id="ctTitle" name="newTitle" type="text" placeholder="Titulo"/>
+        <label>Nueva Fecha</label>
+        <input id="ctDate" name="newDate" type="date"/>
+        <input type="submit" value="Actualizar" onclick="editTask()"/>
     </form>
     <script type="text/javascript" src="../Javascript/script.js"></script>
 </body>
