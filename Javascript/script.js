@@ -36,33 +36,18 @@ function loadList()
 {
     if(tasksLS == null)
     {
-        tasksHTML.innerHTML = `<p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button onclick="addTaskRedirect()">Añadir Tarea</button>`;
-    }
-    else
-    {
-        let list = JSON.parse(tasksLS);
-        //console.log(list);
         tasksHTML.innerHTML += `
-            <div id='taskTitles' class='taskTitles'>
-                <p>Titulo</p>
-                <p>Fecha Limite</p>
-                <p>Estado</p>
-            </div>
+        <div id='task' class='task'>
+            <p>${list[i].title}</p>
+            <p>${list[i].datelimit}</p>
+            <!--p>${list[i].timestamp}</p-->
+            <p>${list[i].isFinished}</p>
+            <button id="fin" class="btn" onclick="finishTask('${list[i].id}')"></button>
+            <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
+            <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
+            <!--p>${list[i].id}</p-->
+        </div>
         `;
-        for(i = 0; i < list.length; i++)
-        {
-            tasksHTML.innerHTML += `
-            <div id='task' class='task'>
-                <p>${list[i].title}</p>
-                <p>${reformat(list[i].datelimit)}</p>
-                <p>${list[i].isFinished}</p>
-                <button id="fin" class="btn" onclick="finishTask('${list[i].id}')"></button>
-                <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
-                <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
-            </div>
-            `;
-        }
-        tasksHTML.innerHTML += '</div>';
     }
 }
 
