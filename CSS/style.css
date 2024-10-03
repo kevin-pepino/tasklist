@@ -7,7 +7,7 @@
 .taskfalse, .tasktrue
 {
     display: grid;
-    grid-template-columns: 25% 25% 25% 4.3% 4.3% 4.3% 12.1%;
+    grid-template-columns: 25% 25% 25% 4% 4% 4% 13%;
 }
 body{
     background-color: rgb(0, 0, 109);
@@ -42,7 +42,8 @@ p{
 }
 
 #fintrue, #finfalse{
-    background-color:black;
+    background-color:transparent;
+    border-style: none;
     background-image: url('../img/FinFalse.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -89,7 +90,8 @@ p{
 }    
 
 #mod{
-    background-color: black;
+    background-color:transparent;
+    border-style: none;
     background-image: url('../img/Lapiz.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -103,7 +105,8 @@ p{
     background-image: url('../img/Lapiz\ Azul.png');
 }
 #sup{
-    background-color: black;
+    background-color:transparent;
+    border-style: none;
     background-image: url('../img/CuboBasura.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -123,10 +126,23 @@ p{
 form{
     text-align: center;
     margin:auto;
+    font-family: Arial;
 }
 label{
     font-size: 20px;
 }
 h1{
     text-align: center;
+}
+#ctTitle, #ctDate{
+    font-size: 20px;
+
+}
+#ctDate{
+    width: 240px;
+}
+#actualizar{
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
 }
