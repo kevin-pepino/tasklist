@@ -1,13 +1,13 @@
 .taskTitles
 {
     display: grid;
-    grid-template-columns: 15% 15% 15% 15%;
+    grid-template-columns: 25% 25% 25%;
 }
 
 .task
 {
     display: grid;
-    grid-template-columns: 15% 15% 15% 15% 15% 15% 10%;
+    grid-template-columns: 25% 25% 25% 5% 5% 5%;
 }
 body{
     background-color: rgb(0, 0, 109);
@@ -36,37 +36,48 @@ p{
     word-wrap: break-word;
 }
 #fin{
-    background-color: greenyellow;
+    background-color:black;
     background-image: url('../img/FinFalse.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    width: 48px;
+    margin-left:auto;
+    
 
 }
-/*#fin:hover{
+#fin:hover{
 
     
-}*/
-/*#fin:hover{
-
-    
-}*/
+}
 #mod{
-    background-color: aqua;
+    background-color: black;
     background-image: url('../img/Lapiz.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    width: 48px;
+    margin-left:auto;
+      
+
 }
 #mod:hover{
     background-image: url('../img/Lapiz\ Azul.png');
 }
 #sup{
-    background-color: rgb(130, 5, 5);
+    background-color: black;
     background-image: url('../img/CuboBasura.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    width: 48px;
+    margin-left:auto;
+    
+    
+    
+    
+    
+    
 
 }   
 #sup:hover{
