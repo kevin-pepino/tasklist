@@ -22,6 +22,15 @@ function fullwipe()
     location.reload();
 }
 
+function fullStorageWipe()
+{
+    if(confirm('Desea eliminar todas las tareas?'))
+    {
+        localStorage.clear();
+        location.reload();
+    }
+}
+
 //REDIRECTS
 function addTaskRedirect(){location.href = '../HTML/insertTask.html';}
 function taskListRedirect(){location.href = '../HTML/index.html';}
@@ -29,6 +38,11 @@ function editTaskRedirect(id)
 {
     localStorage.setItem('id', id);
     location.href = '../HTML/editTask.html';
+}
+function addSubRedirect(id)
+{
+    localStorage.setItem('id', id);
+    location.href = '../HTML/insertSubTask.html';
 }
 
 //GENERATE LIST ON MAIN PAGE
@@ -49,14 +63,14 @@ function loadList()
                 <p>Fecha Limite</p>
                 <p>Estado</p>
                 <div></div>
-                <button id="fullwipe" class="fullwipe" onclick="fullwipe()"></button>
+                <button id="fullwipe" class="fullwipe" onclick="fullStorageWipe()"></button>
             </div>
         `;
         for(i = 0; i < list.length; i++)
         {
             let finid = '';
             let taskid = '';
-            let status = ''
+            let status = '';
             if(list[i].isFinished)
             {
                 finid = "fintrue"; 
@@ -74,6 +88,7 @@ function loadList()
                 <p>${list[i].title}</p>
                 <p>${reformat(list[i].datelimit)}</p>
                 <p>${status}</p>
+                <button id="nwt" class="btn" onclick="addSubRedirect('${list[i].id}')"></button>
                 <button id="${finid}" class="btn" onclick="finishTask('${list[i].id}')"></button>
                 <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
                 <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
@@ -83,6 +98,25 @@ function loadList()
                 </div>
             </div>
             `;
+            /*if(list[i].sublist.length > 0)
+            {
+                for(j = 0; j < list[i].sublist.length; j++)
+                {
+                    tasksHTML.innerHTML += `
+                    <div id='${taskid}' class='${taskid}'>
+                        <p>${list[i].sublist[j].title}</p>
+                        <p>${reformat(list[i].datelimit)}</p>
+                        <p>${status}</p>
+                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].id}')"></button>
+                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].id}')"></button>
+                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].id}')"></button>
+                        <div id='scroll' class='scroll'>
+                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].id})'></button>
+                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].id})'></button>
+                        </div>
+                    </div>`;
+                }
+            }*/
         }
     }    
 }
@@ -112,13 +146,13 @@ function addTask()
     let timestamp = today();                                    //TIME STAMP OF WHEN IT WAS CREATED
     let isFinished = false;                                     //TASK STATUS, SET AS INCOMPLETE (FALSE)
     
-
     const item = {
         id: id,
         title: title,
         datelimit: datelimit, 
         timestamp: timestamp, 
-        isFinished: isFinished
+        isFinished: isFinished,
+        sublist: []
     };
     if(title == ''){alert('El titulo no puede estar vacío.');}
     else if(datelimit == ''){alert('La fecha no puede estar vacía.');}
@@ -206,17 +240,20 @@ function editTask()
 //DELETE A SPECIFIC TASK
 function deleteTask(id)
 {
-    let list = JSON.parse(tasksLS);
-    let newList = [];
-    list.forEach(element => {
-        if(element.id != id)
-        {
-            newList.push(element);
-        }
-    });
-    if(newList.length == 0){fullwipe();}
-    else{localStorage.setItem('tasks', JSON.stringify(newList));}
-    location.reload();
+    if(confirm('Desea eliminar esta tarea?'))
+    {
+        let list = JSON.parse(tasksLS);
+        let newList = [];
+        list.forEach(element => {
+            if(element.id != id)
+            {
+                newList.push(element);
+            }
+        });
+        if(newList.length == 0){fullwipe();}
+        else{localStorage.setItem('tasks', JSON.stringify(newList));}
+        location.reload();
+    }
 }
 
 //MOVE A TASK UPWARDS ON THE LIST
@@ -277,4 +314,38 @@ function moveDown(id)
     }
     localStorage.setItem('tasks', JSON.stringify(newList));
     location.reload();
+}
+
+//ADD A SUBTASK WITHIN A TASK
+function addSubTask()
+{
+    let list = JSON.parse(tasksLS);
+    console.log(list);
+    let subId = Math.floor(Math.random(0, 1) * 10000000000);
+    let subTitle = document.forms['form']['title'].value;  
+    let subDate = document.forms['form']['datelimit'].value;
+    let subFinished = false;
+
+    const item =
+    {
+        subId: subId,
+        subTitle: subTitle,
+        subDate: subDate,
+        subFinished: subFinished
+    };
+    console.log(item);
+    if(subTitle == ''){alert('El titulo no puede estar vacío.');}
+    else if(subDate == ''){alert('La fecha no puede estar vacía.');}
+    else
+    {
+        list.forEach(element =>{
+            if(element.id == idLS)
+            {
+                console.log('flag');
+                element.sublist.push(item);
+            }
+        });
+        localStorage.setItem('tasks', JSON.stringify(list));
+        location.href = '../HTML/index.html';
+    }
 }
