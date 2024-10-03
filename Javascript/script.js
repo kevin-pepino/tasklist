@@ -98,25 +98,25 @@ function loadList()
                 </div>
             </div>
             `;
-            /*if(list[i].sublist.length > 0)
+            if(list[i].sublist.length > 0)
             {
                 for(j = 0; j < list[i].sublist.length; j++)
                 {
                     tasksHTML.innerHTML += `
                     <div id='${taskid}' class='${taskid}'>
-                        <p>${list[i].sublist[j].title}</p>
-                        <p>${reformat(list[i].datelimit)}</p>
+                        <p>${list[i].sublist[j].subTitle}</p>
+                        <p>${reformat(list[i].sublist[i].subDate)}</p>
                         <p>${status}</p>
-                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].id}')"></button>
-                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].id}')"></button>
-                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].id}')"></button>
+                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].sublist[j].subId}')"></button>
+                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].sublist[j].subId}')"></button>
+                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].subId}')"></button>
                         <div id='scroll' class='scroll'>
-                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].id})'></button>
-                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].id})'></button>
+                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].sublist[j].subId})'></button>
+                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].sublist[j].subId})'></button>
                         </div>
                     </div>`;
                 }
-            }*/
+            }
         }
     }    
 }
