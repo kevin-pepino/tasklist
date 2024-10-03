@@ -1,7 +1,37 @@
+.addTask
+{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/Añadir.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.addTask:hover
+{
+    background-image: url('../img/AñadirHover.png');
+}
+
+.fullwipe
+{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/BT.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.fullwipe:hover
+{
+    background-image: url('../img/BTHover.png');
+}
+
 .taskTitles
 {
     display: grid;
-    grid-template-columns: 25% 25% 25%;
+    grid-template-columns: 5% 15% 35% 15% 21.2% 5%;
 }
 
 .taskfalse, .tasktrue
@@ -9,6 +39,24 @@
     display: grid;
     grid-template-columns: 25% 25% 25% 4.3% 4.3% 4.3% 12.1%;
 }
+
+.taskList
+{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/goback.png');
+    width: 5vw;
+    height: 10vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.taskList:hover
+{
+    background-image: url('../img/gobackhover.png');
+}
+
 body{
     background-color: rgb(0, 0, 109);
 }
@@ -20,9 +68,7 @@ h1,.txt,.taskTitles,.taskfalse, .tasktrue{
 .taskTitles{
     font-weight: bold;
     font-size: 25px;   
-    text-align: center; 
-    
-    
+    text-align: center;     
 }
 .taskfalse, .tasktrue{
     border-style: solid;
