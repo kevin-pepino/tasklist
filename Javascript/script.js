@@ -43,7 +43,7 @@ function loadList()
         let list = JSON.parse(tasksLS);
         console.log(list);
         tasksHTML.innerHTML += `
-            <div id='taskTitles' class='taskTitles'>
+            <div id='taskTitles' class='taskTitles'>                
                 <button id="addTask" class="addTask" onclick="addTaskRedirect()"></button>
                 <p>Titulo</p>
                 <p>Fecha Limite</p>
