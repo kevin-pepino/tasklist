@@ -31,13 +31,13 @@
 .taskTitles
 {
     display: grid;
-    grid-template-columns: 5% 15% 35% 15% 21.2% 5%;
+    grid-template-columns: 5% 40% 18% 9% 20.25% 5%;
 }
 
 .taskfalse, .tasktrue
 {
     display: grid;
-    grid-template-columns: 25% 25% 25% 4% 4% 4% 13%;
+    grid-template-columns: 50% 9% 17% 3% 4.7% 3.8% 3.8% 8.8%;
 }
 
 .taskList
@@ -163,9 +163,23 @@ p{
 }   
 #sup:hover{
     background-image: url('../img/CuboBasuraRojo.png');
-    
-
 }
+
+#nwt{
+    background-color:transparent;
+    border-style: none;
+    background-image: url('../img/Añadir.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 48px;
+    margin-left:auto;
+    
+}   
+#nwt:hover{
+    background-image: url('../img/AñadirHover.png');
+}
+
 #current, form{
     color: white;
 }
