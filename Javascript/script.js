@@ -44,9 +44,12 @@ function loadList()
         console.log(list);
         tasksHTML.innerHTML += `
             <div id='taskTitles' class='taskTitles'>
+                <button id="addTask" class="addTask" onclick="addTaskRedirect()"></button>
                 <p>Titulo</p>
                 <p>Fecha Limite</p>
                 <p>Estado</p>
+                <div></div>
+                <button id="fullwipe" class="fullwipe" onclick="fullwipe()"></button>
             </div>
         `;
         for(i = 0; i < list.length; i++)
@@ -69,7 +72,7 @@ function loadList()
             tasksHTML.innerHTML += `
             <div id='${taskid}' class='${taskid}'>
                 <p>${list[i].title}</p>
-                <p>${list[i].datelimit}</p>
+                <p>${reformat(list[i].datelimit)}</p>
                 <p>${status}</p>
                 <button id="${finid}" class="btn" onclick="finishTask('${list[i].id}')"></button>
                 <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
