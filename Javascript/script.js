@@ -46,22 +46,38 @@ function loadList()
             <div id='taskTitles' class='taskTitles'>
                 <p>Titulo</p>
                 <p>Fecha Limite</p>
-                <!--p>Creado</p-->
                 <p>Estado</p>
             </div>
         `;
         for(i = 0; i < list.length; i++)
         {
+            let finid = '';
+            let taskid = '';
+            let status = ''
+            if(list[i].isFinished)
+            {
+                finid = "fintrue"; 
+                taskid = 'tasktrue'
+                status = 'Finalizado'
+            }
+            else
+            {
+                finid = "finfalse"; 
+                taskid = 'taskfalse'
+                status = 'Incompleto'
+            }
             tasksHTML.innerHTML += `
-            <div id='task' class='task'>
+            <div id='${taskid}' class='${taskid}'>
                 <p>${list[i].title}</p>
                 <p>${list[i].datelimit}</p>
-                <!--p>${list[i].timestamp}</p-->
-                <p>${list[i].isFinished}</p>
-                <button id="fin" class="btn" onclick="finishTask('${list[i].id}')"></button>
+                <p>${status}</p>
+                <button id="${finid}" class="btn" onclick="finishTask('${list[i].id}')"></button>
                 <button id="mod" class="btn" onclick="editTaskRedirect('${list[i].id}')"></button>
                 <button id="sup" class="btn" onclick="deleteTask('${list[i].id}')"></button>
-                <!--p>${list[i].id}</p-->
+                <div id='scroll' class='scroll'>
+                    <button id='btnup' class='btnup' onclick='moveUp(${list[i].id})'></button>
+                    <button id='btndown'class='btndown' onclick='moveDown(${list[i].id})'></button>
+                </div>
             </div>
             `;
         }
@@ -154,28 +170,34 @@ function finishTask(id)
     list.forEach(element => {
         if(element.id == id)
         {
-            element.isFinished = true;
-            document.getElementById('fin').style.backgroundImage = "url('../img/FinTrue.png\')";
+            if(element.isFinished){element.isFinished = false;}
+            else{element.isFinished = true;}
         }
     });
     localStorage.setItem('tasks', JSON.stringify(list));
-    //location.reload();
+    location.reload();
 }
 
 //UPDATE A TASK WITH NEW INFO
 function editTask()
 {
     let list = [];
-    JSON.parse(tasksLS).forEach(element => {
-        if(element.id == idLS)
-        {
-            element.title = document.forms['form']['newTitle'].value;
-            element.datelimit = document.forms['form']['newDate'].value;;
-        }
-        list.push(element)
-    });
-    localStorage.setItem('tasks', JSON.stringify(list));
-    location.href = '../HTML/index.html';
+    if(document.forms['form']['newTitle'].value == ''){alert('El titulo no puede estar vacío.');}
+    else if(document.forms['form']['newDate'].value == ''){alert('La fecha no puede estar vacía.');}
+    else
+    {
+        JSON.parse(tasksLS).forEach(element => {
+            if(element.id == idLS)
+            {
+                
+                element.title = document.forms['form']['newTitle'].value;
+                element.datelimit = document.forms['form']['newDate'].value;
+            }
+            list.push(element)
+        });
+        localStorage.setItem('tasks', JSON.stringify(list));
+        location.href = '../HTML/index.html';
+    }
 }
 
 //DELETE A SPECIFIC TASK
@@ -191,5 +213,65 @@ function deleteTask(id)
     });
     if(newList.length == 0){fullwipe();}
     else{localStorage.setItem('tasks', JSON.stringify(newList));}
+    location.reload();
+}
+
+//MOVE A TASK UPWARDS ON THE LIST
+function moveUp(id)
+{
+    let list = JSON.parse(tasksLS);
+    let newList = [];
+    for(i = 0; i < list.length; i++)
+    {
+        if(i == 0)
+        {
+            newList.push(list[i]);
+        }
+        else if(list[i].id == id)
+        {
+            newList.splice(newList.length - 1, 0, list[i]);
+        }
+        else
+        {
+            newList.push(list[i]);
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(newList));
+    location.reload();
+}
+
+//MOVE A TASK DOWNWARDS ON THE LIST
+function moveDown(id)
+{
+    let list = JSON.parse(tasksLS);
+    let newList = [];
+    let flag;
+    let storeValue;
+    for(i = 0; i < list.length; i++)
+    {
+        
+        if(i == flag)
+        {
+            newList.push(list[i]);
+            newList.push(storeValue);
+        }
+        else
+        {
+            if(i == list.length - 1)
+            {
+                newList.push(list[i]);
+            }
+            else if(list[i].id == id)
+            {
+                flag = i + 1;
+                storeValue = list[i];
+            }
+            else
+            {
+                newList.push(list[i]);
+            }
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(newList));
     location.reload();
 }
