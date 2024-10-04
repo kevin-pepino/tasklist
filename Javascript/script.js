@@ -126,6 +126,7 @@ function loadList()
                         <p>${list[i].sublist[j].subTitle}</p>
                         <p>${reformat(list[i].sublist[j].subDate)}</p>
                         <p>${status}</p>
+                        <div></div>
                         <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         <button id="mod" class="btn" onclick="editSubRedirect('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         <button id="sup" class="btn" onclick="deleteSubTask('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
