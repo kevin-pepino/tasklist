@@ -38,6 +38,7 @@
 {
     display: grid;
     grid-template-columns: 50% 9% 17% 3% 4.7% 3.8% 3.8% 8.8%;
+    
 }
 
 .taskList
@@ -63,6 +64,7 @@ body{
 h1,.txt,.taskTitles,.taskfalse, .tasktrue{
     color: white;
     font-family: Arial;
+    
     
 }
 .taskTitles{
@@ -189,18 +191,21 @@ form{
     font-family: Arial;
     font-size: 20px;
 }
-label{
-    font-size: 20px;
+label,#titulosub,#fechaLsub{
+    font-size: 25px;
+    height: 20px;
 }
 h1{
     text-align: center;
 }
 #ctTitle, #ctDate{
     font-size: 20px;
+    height: 20px;
 
 }
 #ctDate{
-    width: 240px;
+    width: 237px;
+
 }
 #actualizar{
     width: 100px;
@@ -208,13 +213,48 @@ h1{
     font-weight: bold;
 }
 #teextoo{
-    width: 240px;
+    width: 260px;
+    height: 20px;
+    font-size: 20px;
 }
 #data{
-    width: 175px; 
+    width: 180px; 
+    height: 20px;
+    font-size: 20px;
 }
 #finish{
     width: 100px;
     height: 30px;
     font-weight: bold;
+}
+#finsh{
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+}
+#fechaLsub{
+    width: 227px;
+}
+#text{
+    font-size: 25px;
+}
+.txt{
+    text-align: center;
+    font-size: 20px;
+}
+#plus{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/Añadir.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    
+}
+#plus:hover{
+    background-image: url('../img/AñadirHover.png');
 }
