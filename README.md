@@ -1,6 +1,6 @@
 # Lista de Tareas
 ### Colaboradores
-· Xavier B.
-· Victor F.
-· Aaron F.
-· Xavier R.
+> Xavier Barreras
+> Victor M. Falcon
+> Aaron Fuentes
+> Xavier Ramirez
