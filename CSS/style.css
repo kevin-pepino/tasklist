@@ -31,7 +31,7 @@
 .taskTitles
 {
     display: grid;
-    grid-template-columns: 5% 40% 18% 9% 20.25% 5%;
+    grid-template-columns: 5% 20% 20% 18% 9% 20.25% 5%;
 }
 
 .taskfalse, .tasktrue, .subfalse, .subtrue
@@ -205,4 +205,24 @@ h1{
     width: 100px;
     height: 30px;
     font-weight: bold;
+}
+
+.import, .export
+{
+    background-color: white;
+    margin-top: 7%;
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.import2
+{
+    background-color: white;
+    width: 30%;
+    height: 20%;
+    font-weight: bold;
+    font-style: italic;
 }
