@@ -44,6 +44,12 @@ function addSubRedirect(id)
     localStorage.setItem('id', id);
     location.href = '../HTML/insertSubTask.html';
 }
+function editSubRedirect(id, subId)
+{
+    let values = [id, subId];
+    localStorage.setItem('id', values);
+    location.href = '../HTML/editSubTask.html';
+}
 
 //GENERATE LIST ON MAIN PAGE
 function loadList()
@@ -70,21 +76,19 @@ function loadList()
         {
             let finid = '';
             let taskid = '';
-            let subid = '';
+            let subId = '';
             let status = '';
             if(list[i].isFinished)
             {
                 finid = "fintrue"; 
                 taskid = 'tasktrue';
                 status = 'Finalizado';
-                subid = 'subtrue';
             }
             else
             {
                 finid = "finfalse"; 
                 taskid = 'taskfalse';
                 status = 'Incompleto';
-                subid = 'subfalse';
             }
             tasksHTML.innerHTML += `
             <div id='${taskid}' class='${taskid}'>
@@ -105,17 +109,29 @@ function loadList()
             {
                 for(j = 0; j < list[i].sublist.length; j++)
                 {
+                    if(list[i].sublist[j].subFinished)
+                    {
+                        finid = "fintrue"; 
+                        status = 'Finalizado';
+                        subId = 'subtrue';
+                    }
+                    else
+                    {
+                        finid = "finfalse"; 
+                        status = 'Incompleto';
+                        subId = 'subfalse';
+                    }
                     tasksHTML.innerHTML += `
-                    <div id='${subid}' class='${subid}'>
+                    <div id='${subId}' class='${subId}'>
                         <p>${list[i].sublist[j].subTitle}</p>
-                        <p>${reformat(list[i].sublist[i].subDate)}</p>
+                        <p>${reformat(list[i].sublist[j].subDate)}</p>
                         <p>${status}</p>
-                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].sublist[j].subId}')"></button>
-                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].sublist[j].subId}')"></button>
-                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].subId}')"></button>
+                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
+                        <button id="mod" class="btn" onclick="editSubRedirect('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
+                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         <div id='scroll' class='scroll'>
-                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].sublist[j].subId})'></button>
-                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].sublist[j].subId})'></button>
+                            <button id='btnup' class='btnup' onclick='subUp('${list[i].id}', '${list[i].sublist[j].subId}'})'></button>
+                            <button id='btndown'class='btndown' onclick='subDown('${list[i].id}', '${list[i].sublist[j].subId}'})'></button>
                         </div>
                     </div>`;
                 }
@@ -123,7 +139,6 @@ function loadList()
         }
     }    
 }
-
 
 //INSERTS ITEM INFO WHEN LOADING THE EDIT TASK
 function loadEdit()
@@ -133,6 +148,23 @@ function loadEdit()
         {
             document.getElementById('ctTitle').value = element.title;
             document.getElementById('ctDate').value = element.datelimit;
+        }
+    });
+}
+
+//INSERTS SUBITEM INFO WHEN LOADING THE SUBEDIT TASK
+function loadSubEdit()
+{
+    JSON.parse(tasksLS).forEach(element =>{
+        if(element.id == idLS.split(',')[0])
+        {
+            element.sublist.forEach(subelement => {
+                if(subelement.subId == idLS.split(',')[1])
+                {
+                    document.getElementById('ctTitle').value = subelement.subTitle;
+                    document.getElementById('ctDate').value = subelement.subDate;
+                }
+            });
         }
     });
 }
@@ -212,6 +244,10 @@ function finishTask(id)
         {
             if(element.isFinished){element.isFinished = false;}
             else{element.isFinished = true;}
+            element.sublist.forEach(subelement => {
+                if(element.isFinished){subelement.subFinished = true;}
+                else{subelement.subFinished = false;}
+            })
         }
     });
     localStorage.setItem('tasks', JSON.stringify(list));
@@ -356,4 +392,116 @@ function addSubTask()
         localStorage.setItem('tasks', JSON.stringify(list));
         location.href = '../HTML/index.html';
     }
+}
+
+//DELETE SUBTASK
+function deleteSubTask(id, subId)
+{
+    if(confirm('Desea eliminar esta tarea?'))
+    {
+        let list = JSON.parse(tasksLS);
+        let newList = [];
+        list.forEach(element => {
+            if(element.id == id)
+            {
+                element.sublist.forEach(subelement =>{
+                    if(subelement.subId != subId)
+                    {
+                        newList.push(subelement);
+                    }
+                });
+                element.sublist = newList;
+            }
+        });
+        localStorage.setItem('tasks', JSON.stringify(list));
+        location.reload();
+    }
+}
+
+//SAVE THE NEW DATA FOR THE SUBTASK
+function editSubTask()
+{
+    let list = [];
+    if(document.forms['form']['newTitle'].value == ''){alert('El titulo no puede estar vacío.');}
+    else if(document.forms['form']['newDate'].value == ''){alert('La fecha no puede estar vacía.');}
+    else
+    {
+        JSON.parse(tasksLS).forEach(element => {
+            if(element.id == idLS.split(',')[0])
+            {
+                element.sublist.forEach(subelement =>
+                {
+                    if(subelement.subId == idLS.split(',')[1])
+                    {
+                        subelement.subTitle = document.forms['form']['newTitle'].value;
+                        subelement.subDate = document.forms['form']['newDate'].value;
+                    }
+                });
+            }
+            list.push(element)
+        });
+        localStorage.setItem('tasks', JSON.stringify(list));
+        location.href = '../HTML/index.html';
+    }
+}
+
+//MARKS A SUBTASK AS FINISHED. IF ALL SUBTASKS ARE FINISHED, SO WILL THE MAIN TASK
+function finishSubTask(id, subId)
+{
+    let list = JSON.parse(tasksLS);
+    let trueCounter = 0;
+    list.forEach(element => {
+        if(element.id == id)
+        {
+            element.sublist.forEach(subelement =>
+            {
+                if(subelement.subId == subId)
+                {
+                    if(subelement.subFinished){subelement.subFinished = false;}
+                    else{subelement.subFinished = true;}
+                }
+                if(subelement.subFinished){trueCounter++;}
+            });
+            if(trueCounter == element.sublist.length){element.isFinished = true;}
+            else{element.isFinished = false;}
+        }
+    });
+    localStorage.setItem('tasks', JSON.stringify(list));
+    location.reload();
+}
+
+//MOVES A SUBTASK UP WITHIN ITS LIST
+function subUp()
+{
+    let list = JSON.parse(tasksLS);
+    let newList = [];
+    let reloadFlag = true;
+    for(i = 0; i < list.length; i++)
+    {
+        for(i = 0; i < list[i].sublist.length; j++)
+        {
+            if(i == 0 && list[i].id == id)
+            {
+                newList.push(list[i].sublist[j]);
+                reloadFlag = false;
+            }
+            else if(list[i].id == id)
+            {
+                newList.splice(newList.length - 1, 0, list[i].sublist[j]);
+            }
+            else
+            {
+                newList.push(list[i].sublist[j]);
+            }
+        }
+        list[i].sublist = newList;
+    }
+    localStorage.setItem('tasks', JSON.stringify(list));
+    if(reloadFlag){location.reload();}
+}
+
+//MOVES A SUBTASK DOWN WITHIN ITS LIST
+function subDown()
+{
+
 }
