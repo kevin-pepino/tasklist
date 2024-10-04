@@ -130,8 +130,8 @@ function loadList()
                         <button id="mod" class="btn" onclick="editSubRedirect('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         <button id="sup" class="btn" onclick="deleteSubTask('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         <div id='scroll' class='scroll'>
-                            <button id='btnup' class='btnup' onclick='subUp('${list[i].id}', '${list[i].sublist[j].subId}'})'></button>
-                            <button id='btndown'class='btndown' onclick='subDown('${list[i].id}', '${list[i].sublist[j].subId}'})'></button>
+                            <button id='btnup' class='btnup' onclick="subUp('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
+                            <button id='btndown'class='btndown' onclick="subDown('${list[i].id}', '${list[i].sublist[j].subId}')"></button>
                         </div>
                     </div>`;
                 }
@@ -471,37 +471,81 @@ function finishSubTask(id, subId)
 }
 
 //MOVES A SUBTASK UP WITHIN ITS LIST
-function subUp()
+function subUp(id, subId)
 {
     let list = JSON.parse(tasksLS);
     let newList = [];
     let reloadFlag = true;
     for(i = 0; i < list.length; i++)
     {
-        for(i = 0; i < list[i].sublist.length; j++)
-        {
-            if(i == 0 && list[i].id == id)
+        if(list[i].id == id){
+
+            for(j = 0; j < list[i].sublist.length; j++)
             {
-                newList.push(list[i].sublist[j]);
-                reloadFlag = false;
+                if(j == 0 && list[i].sublist[j].subId == subId)
+                {
+                    newList.push(list[i].sublist[j]);
+                    reloadFlag = false;
+                }
+                else if(list[i].sublist[j].subId == subId)
+                {
+                    newList.splice(newList.length - 1, 0, list[i].sublist[j]);
+                }
+                else
+                {
+                    newList.push(list[i].sublist[j]);
+                }
             }
-            else if(list[i].id == id)
-            {
-                newList.splice(newList.length - 1, 0, list[i].sublist[j]);
-            }
-            else
-            {
-                newList.push(list[i].sublist[j]);
-            }
+            list[i].sublist = newList;
         }
-        list[i].sublist = newList;
+    
     }
     localStorage.setItem('tasks', JSON.stringify(list));
     if(reloadFlag){location.reload();}
 }
 
 //MOVES A SUBTASK DOWN WITHIN ITS LIST
-function subDown()
+function subDown(id, subId)
 {
+    let list = JSON.parse(tasksLS);
+    let newList = [];
+    let flag;
+    let storeValue;
+    let reloadFlag = true;
+
+    for(i = 0; i < list.length; i++)
+    {
+        if(list[i].id == id)
+        {
+            for(j = 0; j < list[i].sublist.length; j++)
+            {
+                if(j == flag)
+                {
+                    newList.push(list[i].sublist[j]);
+                    newList.push(storeValue);
+                }
+                else
+                {
+                    if(j == list[i].sublist.length - 1 && list[i].sublist[j].subId == subId)
+                    {
+                        newList.push(list[i].sublist[j]);
+                        reloadFlag = false;
+                    }
+                    else if(list[i].sublist[j].subId == subId)
+                    {
+                        flag = j + 1;
+                        storeValue = list[i].sublist[j];
+                    }
+                    else
+                    {
+                        newList.push(list[i].sublist[j]);
+                    }
+                }
+                list[i].sublist = newList;
+            }
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(list));
+    if(reloadFlag){location.reload();}
 
 }
