@@ -258,3 +258,12 @@ h1{
 #plus:hover{
     background-image: url('../img/AñadirHover.png');
 }
+#subfalse{
+    background-color: #2f2f9c;
+}
+#taskfalse{
+    background-color:  #5f5fc9;
+}
+#subtrue{
+    background-color: rgb(39, 99, 39); 
+}
