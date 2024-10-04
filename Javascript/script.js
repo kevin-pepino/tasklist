@@ -70,18 +70,21 @@ function loadList()
         {
             let finid = '';
             let taskid = '';
+            let subid = '';
             let status = '';
             if(list[i].isFinished)
             {
                 finid = "fintrue"; 
-                taskid = 'tasktrue'
-                status = 'Finalizado'
+                taskid = 'tasktrue';
+                status = 'Finalizado';
+                subid = 'subtrue';
             }
             else
             {
                 finid = "finfalse"; 
-                taskid = 'taskfalse'
-                status = 'Incompleto'
+                taskid = 'taskfalse';
+                status = 'Incompleto';
+                subid = 'subfalse';
             }
             tasksHTML.innerHTML += `
             <div id='${taskid}' class='${taskid}'>
@@ -98,25 +101,25 @@ function loadList()
                 </div>
             </div>
             `;
-            /*if(list[i].sublist.length > 0)
+            if(list[i].sublist.length > 0)
             {
                 for(j = 0; j < list[i].sublist.length; j++)
                 {
                     tasksHTML.innerHTML += `
-                    <div id='${taskid}' class='${taskid}'>
-                        <p>${list[i].sublist[j].title}</p>
-                        <p>${reformat(list[i].datelimit)}</p>
+                    <div id='${subid}' class='${subid}'>
+                        <p>${list[i].sublist[j].subTitle}</p>
+                        <p>${reformat(list[i].sublist[i].subDate)}</p>
                         <p>${status}</p>
-                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].id}')"></button>
-                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].id}')"></button>
-                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].id}')"></button>
+                        <button id="${finid}" class="btn" onclick="finishSubTask('${list[i].sublist[j].subId}')"></button>
+                        <button id="mod" class="btn" onclick="editSubTaskRedirect('${list[i].sublist[j].subId}')"></button>
+                        <button id="sup" class="btn" onclick="deleteSubTask('${list[i].sublist[j].subId}')"></button>
                         <div id='scroll' class='scroll'>
-                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].id})'></button>
-                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].id})'></button>
+                            <button id='btnup' class='btnup' onclick='moveUp(${list[i].sublist[j].subId})'></button>
+                            <button id='btndown'class='btndown' onclick='moveDown(${list[i].sublist[j].subId})'></button>
                         </div>
                     </div>`;
                 }
-            }*/
+            }
         }
     }    
 }
@@ -261,11 +264,13 @@ function moveUp(id)
 {
     let list = JSON.parse(tasksLS);
     let newList = [];
+    let reloadFlag = true;
     for(i = 0; i < list.length; i++)
     {
-        if(i == 0)
+        if(i == 0 && list[i].id == id)
         {
             newList.push(list[i]);
+            reloadFlag = false;
         }
         else if(list[i].id == id)
         {
@@ -277,7 +282,7 @@ function moveUp(id)
         }
     }
     localStorage.setItem('tasks', JSON.stringify(newList));
-    location.reload();
+    if(reloadFlag){location.reload();}
 }
 
 //MOVE A TASK DOWNWARDS ON THE LIST
@@ -287,6 +292,8 @@ function moveDown(id)
     let newList = [];
     let flag;
     let storeValue;
+    let reloadFlag = true;
+
     for(i = 0; i < list.length; i++)
     {
         
@@ -297,9 +304,10 @@ function moveDown(id)
         }
         else
         {
-            if(i == list.length - 1)
+            if(i == list.length - 1 && list[i].id == id)
             {
                 newList.push(list[i]);
+                reloadFlag = false;
             }
             else if(list[i].id == id)
             {
@@ -313,7 +321,7 @@ function moveDown(id)
         }
     }
     localStorage.setItem('tasks', JSON.stringify(newList));
-    location.reload();
+    if(reloadFlag){location.reload();}
 }
 
 //ADD A SUBTASK WITHIN A TASK
