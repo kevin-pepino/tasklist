@@ -1,3 +1,26 @@
+.añadir
+{
+    background-image: url('../img/Añadir.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 15vw;
+    height: 30vh;
+    background-color: transparent;
+    border-style: none;
+}
+.añadir:hover
+{
+    background-image: url('../img/AñadirHover.png');
+}
+
+.align
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .addTask
 {
     background-color: transparent;
@@ -227,8 +250,8 @@ h1{
 .import2
 {
     background-color: white;
-    width: 30%;
-    height: 20%;
+    width: 10vw;
+    height: 10vh;
     font-weight: bold;
     font-style: italic;
 }

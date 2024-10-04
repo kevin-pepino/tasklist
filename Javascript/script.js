@@ -60,8 +60,14 @@ function loadList()
     {
         tasksHTML.innerHTML = `
                                 <p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p>
-                                <button onclick="addTaskRedirect()">Añadir Tarea</button>
-                                <button id="import" class="import2" onclick="importData()">Importar</button>
+                                <div class="align">
+                                    <div>
+                                        <button id="añadir" class="añadir" onclick="addTaskRedirect()"></button>
+                                    </div>
+                                    <div>
+                                        <button id="import" class="import2" onclick="importData()">Importar</button>
+                                    </div>
+                                </div>
                                 `;
     }
     else
