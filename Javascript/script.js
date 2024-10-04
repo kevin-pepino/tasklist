@@ -397,7 +397,7 @@ function addSubTask()
 //DELETE SUBTASK
 function deleteSubTask(id, subId)
 {
-    if(confirm('Desea eliminar esta tarea?'))
+    if(confirm('Desea eliminar esta subtarea?'))
     {
         let list = JSON.parse(tasksLS);
         let newList = [];
@@ -541,8 +541,8 @@ function subDown(id, subId)
                         newList.push(list[i].sublist[j]);
                     }
                 }
-                list[i].sublist = newList;
             }
+            list[i].sublist = newList;
         }
     }
     localStorage.setItem('tasks', JSON.stringify(list));
