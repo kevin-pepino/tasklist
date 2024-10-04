@@ -261,11 +261,13 @@ function moveUp(id)
 {
     let list = JSON.parse(tasksLS);
     let newList = [];
+    let reloadFlag = true;
     for(i = 0; i < list.length; i++)
     {
-        if(i == 0)
+        if(i == 0 && list[i].id == id)
         {
             newList.push(list[i]);
+            reloadFlag = false;
         }
         else if(list[i].id == id)
         {
@@ -277,7 +279,7 @@ function moveUp(id)
         }
     }
     localStorage.setItem('tasks', JSON.stringify(newList));
-    location.reload();
+    if(reloadFlag){location.reload();}
 }
 
 //MOVE A TASK DOWNWARDS ON THE LIST
@@ -287,6 +289,8 @@ function moveDown(id)
     let newList = [];
     let flag;
     let storeValue;
+    let reloadFlag = true;
+
     for(i = 0; i < list.length; i++)
     {
         
@@ -297,9 +301,10 @@ function moveDown(id)
         }
         else
         {
-            if(i == list.length - 1)
+            if(i == list.length - 1 && list[i].id == id)
             {
                 newList.push(list[i]);
+                reloadFlag = false;
             }
             else if(list[i].id == id)
             {
@@ -313,7 +318,7 @@ function moveDown(id)
         }
     }
     localStorage.setItem('tasks', JSON.stringify(newList));
-    location.reload();
+    if(reloadFlag){location.reload();}
 }
 
 //ADD A SUBTASK WITHIN A TASK
