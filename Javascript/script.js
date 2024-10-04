@@ -50,7 +50,7 @@ function loadList()
 {
     if(tasksLS == null)
     {
-        tasksHTML.innerHTML = `<p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button onclick="addTaskRedirect()">Añadir Tarea</button>`;
+        tasksHTML.innerHTML = `<p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button id="plus" onclick="addTaskRedirect()"</button>`;
     }
     else
     {
