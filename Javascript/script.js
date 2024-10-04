@@ -7,13 +7,15 @@
 /*    Xavier Barreras     */
 /*    Xavier Ramirez      */
 /**************************/
-
+//localStorage.clear();
 //HTML REFERENCES
 const tasksHTML = document.getElementById('tasks');
 
 //LOCAL STORAGE REFERENCES
 const tasksLS = localStorage.getItem('tasks');      //ALL TASKS SAVED
 const idLS = localStorage.getItem('id');          //ID SHARED ACROSS PAGES
+
+
 
 //FOR LOCAL STORAGE WIPE
 function fullwipe()
@@ -56,7 +58,11 @@ function loadList()
 {
     if(tasksLS == null)
     {
-        tasksHTML.innerHTML = `<p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p><button onclick="addTaskRedirect()">Añadir Tarea</button>`;
+        tasksHTML.innerHTML = `
+                                <p class="txt">No hay tareas añadidas en el listado. Empieza a añadir unas cuantas</p>
+                                <button onclick="addTaskRedirect()">Añadir Tarea</button>
+                                <button id="import" class="import2" onclick="importData()">Importar</button>
+                                `;
     }
     else
     {
@@ -65,7 +71,8 @@ function loadList()
         tasksHTML.innerHTML += `
             <div id='taskTitles' class='taskTitles'>                
                 <button id="addTask" class="addTask" onclick="addTaskRedirect()"></button>
-                <div></div>
+                <button id="export" class="export" onclick="exportData()">Exportar</button>
+                <button id="import" class="import" onclick="importData()">Importar</button>
                 <p>Fecha Limite</p>
                 <p>Estado</p>
                 <div></div>
@@ -548,5 +555,44 @@ function subDown(id, subId)
     }
     localStorage.setItem('tasks', JSON.stringify(list));
     if(reloadFlag){location.reload();}
+}
 
+//DOWNLOADS ALL OF THE DATA IN A JSON FILE
+function exportData()
+{
+  const json = `data:text/json;chatset=utf-8,${encodeURIComponent(tasksLS)}`;
+  const link = document.createElement("a");
+  link.href = json;
+  link.download = "data.json";
+
+  link.click();
+}
+
+//
+
+function importData()
+{
+    let list = [];
+    let sublist = [];
+    fetch('../JSON/data.json')
+    .then((response) => response.json())
+    .then((data) => 
+    {
+        data.forEach(element => 
+        {
+            if(element.id != null || element.title != null || element.datelimit != null)
+            {
+                element.sublist.forEach(subelement =>
+                {
+                    if(subelement.subId != null || subelement.subTitle != null || subelement.subDate != null)
+                    {
+                        sublist.push(subelement);
+                    }
+                });
+                list.push(element);
+            };
+        });
+        localStorage.setItem('tasks', JSON.stringify(list));
+        location.reload();
+    });
 }
