@@ -70,18 +70,21 @@ function loadList()
         {
             let finid = '';
             let taskid = '';
+            let subid = '';
             let status = '';
             if(list[i].isFinished)
             {
                 finid = "fintrue"; 
-                taskid = 'tasktrue'
-                status = 'Finalizado'
+                taskid = 'tasktrue';
+                status = 'Finalizado';
+                subid = 'subtrue';
             }
             else
             {
                 finid = "finfalse"; 
-                taskid = 'taskfalse'
-                status = 'Incompleto'
+                taskid = 'taskfalse';
+                status = 'Incompleto';
+                subid = 'subfalse';
             }
             tasksHTML.innerHTML += `
             <div id='${taskid}' class='${taskid}'>
@@ -103,7 +106,7 @@ function loadList()
                 for(j = 0; j < list[i].sublist.length; j++)
                 {
                     tasksHTML.innerHTML += `
-                    <div id='${taskid}' class='${taskid}'>
+                    <div id='${subid}' class='${subid}'>
                         <p>${list[i].sublist[j].subTitle}</p>
                         <p>${reformat(list[i].sublist[i].subDate)}</p>
                         <p>${status}</p>
