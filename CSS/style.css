@@ -57,11 +57,18 @@
     grid-template-columns: 5% 20% 20% 18% 9% 20.25% 5%;
 }
 
-.taskfalse, .tasktrue, .subfalse, .subtrue
+.taskfalse, .tasktrue
 {
     display: grid;
     grid-template-columns: 50% 9% 17% 3% 4.7% 3.8% 3.8% 8.8%;
     
+}
+
+.subfalse, .subtrue
+{
+    margin-left: 5%;
+    display: grid;
+    grid-template-columns: 42% 20% 7% 8% 6% 3.8% 4% 9.2%;
 }
 
 .taskList
