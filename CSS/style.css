@@ -57,11 +57,18 @@
     grid-template-columns: 5% 20% 20% 18% 9% 20.25% 5%;
 }
 
-.taskfalse, .tasktrue, .subfalse, .subtrue
+.taskfalse, .tasktrue
 {
     display: grid;
     grid-template-columns: 50% 9% 17% 3% 4.7% 3.8% 3.8% 8.8%;
     
+}
+
+.subfalse, .subtrue
+{
+    margin-left: 5%;
+    display: grid;
+    grid-template-columns: 42% 20% 7% 8% 6% 3.8% 4% 9.2%;
 }
 
 .taskList
@@ -231,7 +238,7 @@ h1{
 
 }
 #actualizar{
-    width: 100px;
+    width: 150px;
     height: 30px;
     font-weight: bold;
 }
@@ -255,26 +262,22 @@ h1{
     font-weight: bold;
     font-style: italic;
 }
-#teextoo{
+.nwTitle{
     width: 260px;
     height: 20px;
     font-size: 20px;
 }
-#data{
+.nwDate{
     width: 180px; 
     height: 20px;
     font-size: 20px;
 }
-#finish{
-    width: 100px;
+.finish{
+    width: 165px;
     height: 30px;
     font-weight: bold;
 }
-#finsh{
-    width: 100px;
-    height: 30px;
-    font-weight: bold;
-}
+
 #fechaLsub{
     width: 227px;
 }
