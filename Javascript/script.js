@@ -34,8 +34,16 @@ function fullStorageWipe()
 }
 
 //REDIRECTS
-function addTaskRedirect(){location.href = '../HTML/insertTask.html';}
-function taskListRedirect(){location.href = '../HTML/index.html';}
+function addTaskRedirect()
+{
+    localStorage.removeItem('backup');
+    location.href = '../HTML/insertTask.html';
+}
+function taskListRedirect()
+{
+    localStorage.removeItem('backup');
+    location.href = '../HTML/index.html';
+}
 function editTaskRedirect(id)
 {
     localStorage.setItem('id', id);
@@ -154,6 +162,13 @@ function loadList()
     }    
 }
 
+function loadAdd()
+{
+    console.log(localStorage.getItem('backup'))
+    document.getElementById('nwTitle').value = localStorage.getItem('backup').split(',')[0];
+    document.getElementById('nwDate').value = localStorage.getItem('backup').split(',')[1];
+}
+
 //INSERTS ITEM INFO WHEN LOADING THE EDIT TASK
 function loadEdit()
 {
@@ -203,14 +218,30 @@ function addTask(value)
         isFinished: isFinished,
         sublist: []
     };
-    if(title == ''){alert('El titulo no puede estar vacío.');}
-    else if(datelimit == ''){alert('La fecha no puede estar vacía.');}
+    if(title == '')
+    {
+        alert('El titulo no puede estar vacío.');
+        saveValues()
+    }
+    else if(datelimit == '')
+    {
+        alert('La fecha no puede estar vacía.');
+        saveValues()
+    }
     else
     {
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
+        localStorage.removeItem('backup');
+        if(value){document.forms['form'].action = '../HTML/index.html';''}
     }
-    if(value){document.forms['form'].action = '../HTML/index.html';''}
+}
+
+//SAVE VALUES TITLE DATE
+function saveValues()
+{
+    let backup = [document.forms['form']['title'].value, document.forms['form']['datelimit'].value]
+    localStorage.setItem('backup',backup)
 }
 
 //CHANGE THE DISPLAY OF DATELIMIT
@@ -398,8 +429,16 @@ function addSubTask(value)
         subFinished: subFinished
     };
     console.log(item);
-    if(subTitle == ''){alert('El titulo no puede estar vacío.');}
-    else if(subDate == ''){alert('La fecha no puede estar vacía.');}
+    if(subTitle == '')
+    {
+        alert('El titulo no puede estar vacío.');
+        saveValues()
+    }
+    else if(subDate == '')
+    {
+        alert('La fecha no puede estar vacía.');
+        saveValues()
+    }
     else
     {
         list.forEach(element =>{
