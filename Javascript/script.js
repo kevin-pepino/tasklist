@@ -220,7 +220,7 @@ function addTask(value)
         isFinished: isFinished,
         sublist: []
     };
-    if(title == '')
+    if(title.trim() === '')
     {
         alert('El titulo no puede estar vacío.');
         saveValues()
@@ -230,6 +230,7 @@ function addTask(value)
         alert('La fecha no puede estar vacía.');
         saveValues()
     }
+    else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
     else
     {
         list.push(item);
