@@ -183,6 +183,13 @@ function loadEdit()
     });
 }
 
+function loadAdd()
+{
+    console.log(localStorage.getItem('backup'))
+    document.getElementById('nwTitle').value = localStorage.getItem('backup').split(',')[0];
+    document.getElementById('nwDate').value = localStorage.getItem('backup').split(',')[1];
+}
+
 //INSERTS SUBITEM INFO WHEN LOADING THE SUBEDIT TASK
 function loadSubEdit()
 {
