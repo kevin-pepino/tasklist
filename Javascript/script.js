@@ -227,18 +227,6 @@ function addTask(value)
         isFinished: isFinished,
         sublist: []
     };
-<<<<<<< HEAD
-    if(title == '')
-        {
-            alert('El titulo no puede estar vacío.');
-            saveValues()
-        }
-    else if(datelimit == '')
-        {
-            alert('La fecha no puede estar vacía.');
-            saveValues()
-        }
-=======
     if(title.trim() === '')
     {
         alert('El titulo no puede estar vacío.');
@@ -250,18 +238,12 @@ function addTask(value)
         saveValues()
     }
     else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
->>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     else
     {
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
-<<<<<<< HEAD
-        location.href = '../HTML/index.html';
-        localStorage.removeItem('backup');
-=======
         localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';''}
->>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     }
 }
 
@@ -458,17 +440,6 @@ function addSubTask(value)
     };
     console.log(item);
     if(subTitle == '')
-<<<<<<< HEAD
-        {
-            alert('El titulo no puede estar vacío.');
-            saveValues()
-        }
-    else if(subDate == '')
-        {
-            alert('La fecha no puede estar vacía.');
-            saveValues()
-        }
-=======
     {
         alert('El titulo no puede estar vacío.');
         saveValues()
@@ -478,7 +449,6 @@ function addSubTask(value)
         alert('La fecha no puede estar vacía.');
         saveValues()
     }
->>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     else
     {
         list.forEach(element =>{
