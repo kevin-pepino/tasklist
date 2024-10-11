@@ -6,18 +6,18 @@
     <title>Insert Task</title>
     <link rel="stylesheet" href="../CSS/style.css"/>
 </head>
-<body>
+<body onload="loadAdd()">
     <div id="redirects" class="redirects">
         <button id="taskList" class="taskList" onclick="taskListRedirect()"></button>
     </div>
     <h1>Añadir Tarea</h1>
     <form name="form">
         <label>Titulo
-        <input name="title" id="teextoo" type="text" placeholder="Titulo"/>
+        <input name="title" id="nwTitle" type="text" placeholder="Titulo"/>
         </label>
         <br>
         <label>Fecha Limite
-        <input name="datelimit" id="data" type="date"/>
+        <input name="datelimit" id="nwDate" type="date"/>
         </label>
         <br>
         <input type="submit" id="finish" value="Terminar" onclick="addTask()" onsubmit="location.href('../html/index.html')"/>
