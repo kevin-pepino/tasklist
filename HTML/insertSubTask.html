@@ -6,18 +6,18 @@
     <title>Insertar Sub Tarea</title>
     <link rel="stylesheet" href="../CSS/style.css"/>
 </head>
-<body onload="console.log(localStorage.getItem('id'))">
+<body onload="loadAdd()">
     <div id="redirects" class="redirects">
         <button id="taskList" class="taskList" onclick="taskListRedirect()"></button>
     </div>
     <h1>Añadir Subtarea</h1>
     <form name="form">
         <label>Titulo
-        <input name="title" id="titulosub" type="text" placeholder="Titulo"/>
+        <input name="title" id="nwTitle" type="text" placeholder="Titulo"/>
         </label>
         <br>
         <label>Fecha Limite
-        <input name="datelimit" id="fechaLsub" type="date"/>
+        <input name="datelimit" id="nwDate" type="date"/>
         </label>
         <br>
         <input type="submit" id="finsh" value="Terminar" onclick="addSubTask()" onsubmit="location.href('../html/index.html')"/>
