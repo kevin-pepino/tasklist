@@ -238,7 +238,7 @@ h1{
 
 }
 #actualizar{
-    width: 100px;
+    width: 150px;
     height: 30px;
     font-weight: bold;
 }
@@ -262,26 +262,22 @@ h1{
     font-weight: bold;
     font-style: italic;
 }
-#teextoo{
+.nwTitle{
     width: 260px;
     height: 20px;
     font-size: 20px;
 }
-#data{
+.nwDate{
     width: 180px; 
     height: 20px;
     font-size: 20px;
 }
-#finish{
-    width: 100px;
+.finish{
+    width: 165px;
     height: 30px;
     font-weight: bold;
 }
-#finsh{
-    width: 100px;
-    height: 30px;
-    font-weight: bold;
-}
+
 #fechaLsub{
     width: 227px;
 }

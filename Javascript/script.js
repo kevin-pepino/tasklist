@@ -164,9 +164,11 @@ function loadList()
 
 function loadAdd()
 {
-    console.log(localStorage.getItem('backup'))
-    document.getElementById('nwTitle').value = localStorage.getItem('backup').split(',')[0];
-    document.getElementById('nwDate').value = localStorage.getItem('backup').split(',')[1];
+    if(localStorage.getItem('backup') != null)
+    {
+        document.getElementById('nwTitle').value = localStorage.getItem('backup').split(',')[0];
+        document.getElementById('nwDate').value = localStorage.getItem('backup').split(',')[1];
+    }
 }
 
 //INSERTS ITEM INFO WHEN LOADING THE EDIT TASK
@@ -323,7 +325,7 @@ function editTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        document.forms['form'].action = '../HTML/index.html';
     }
 }
 
@@ -508,7 +510,7 @@ function editSubTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        document.forms['form'].action = '../HTML/index.html';
     }
 }
 
