@@ -162,6 +162,15 @@ function loadList()
     }    
 }
 
+function loadAdd()
+{
+    if(localStorage.getItem('backup') != null)
+    {
+        document.getElementById('nwTitle').value = localStorage.getItem('backup').split(',')[0];
+        document.getElementById('nwDate').value = localStorage.getItem('backup').split(',')[1];
+    }
+}
+
 //INSERTS ITEM INFO WHEN LOADING THE EDIT TASK
 function loadEdit()
 {
@@ -199,7 +208,7 @@ function loadSubEdit()
 }
 
 //ADD TASK TO THE LIST
-function addTask()
+function addTask(value)
 {
     let list = [];
     if(tasksLS != null){list = JSON.parse(tasksLS);}            
@@ -218,6 +227,7 @@ function addTask()
         isFinished: isFinished,
         sublist: []
     };
+<<<<<<< HEAD
     if(title == '')
         {
             alert('El titulo no puede estar vacío.');
@@ -228,12 +238,30 @@ function addTask()
             alert('La fecha no puede estar vacía.');
             saveValues()
         }
+=======
+    if(title.trim() === '')
+    {
+        alert('El titulo no puede estar vacío.');
+        saveValues()
+    }
+    else if(datelimit == '')
+    {
+        alert('La fecha no puede estar vacía.');
+        saveValues()
+    }
+    else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+>>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     else
     {
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
+<<<<<<< HEAD
         location.href = '../HTML/index.html';
         localStorage.removeItem('backup');
+=======
+        localStorage.removeItem('backup');
+        if(value){document.forms['form'].action = '../HTML/index.html';''}
+>>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     }
 }
 
@@ -308,16 +336,22 @@ function editTask()
     else
     {
         JSON.parse(tasksLS).forEach(element => {
-            if(element.id == idLS)
+            if(element.id == idLS && 
+               (element.title != document.forms['form']['newTitle'].value ||
+               element.datelimit != document.forms['form']['newDate'].value))
             {
                 
                 element.title = document.forms['form']['newTitle'].value;
                 element.datelimit = document.forms['form']['newDate'].value;
+                element.isFinished = false;
+                element.sublist.forEach(subelement => {
+                    subelement.subFinished = false;
+                });
             }
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        document.forms['form'].action = '../HTML/index.html';
     }
 }
 
@@ -406,7 +440,7 @@ function moveDown(id)
 }
 
 //ADD A SUBTASK WITHIN A TASK
-function addSubTask()
+function addSubTask(value)
 {
     let list = JSON.parse(tasksLS);
     console.log(list);
@@ -424,6 +458,7 @@ function addSubTask()
     };
     console.log(item);
     if(subTitle == '')
+<<<<<<< HEAD
         {
             alert('El titulo no puede estar vacío.');
             saveValues()
@@ -433,6 +468,17 @@ function addSubTask()
             alert('La fecha no puede estar vacía.');
             saveValues()
         }
+=======
+    {
+        alert('El titulo no puede estar vacío.');
+        saveValues()
+    }
+    else if(subDate == '')
+    {
+        alert('La fecha no puede estar vacía.');
+        saveValues()
+    }
+>>>>>>> dd84b4378e2f1dc4ec9f8f6ebf95e3880bbf8c9a
     else
     {
         list.forEach(element =>{
@@ -440,10 +486,11 @@ function addSubTask()
             {
                 console.log('flag');
                 element.sublist.push(item);
+                element.isFinished = false;
             }
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        if(value){document.forms['form'].action = '../HTML/index.html';}
     }
 }
 
@@ -484,17 +531,24 @@ function editSubTask()
             {
                 element.sublist.forEach(subelement =>
                 {
-                    if(subelement.subId == idLS.split(',')[1])
+                    if(subelement.subId == idLS.split(',')[1] &&
+                      (subelement.subTitle != document.forms['form']['newTitle'].value ||
+                       subelement.subDate != document.forms['form']['newDate'].value))
                     {
                         subelement.subTitle = document.forms['form']['newTitle'].value;
                         subelement.subDate = document.forms['form']['newDate'].value;
+                        subelement.subFinished = false;
+                    }
+                    if(!subelement.subFinished)
+                    {
+                        element.isFinished = false;
                     }
                 });
             }
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        document.forms['form'].action = '../HTML/index.html';
     }
 }
 
