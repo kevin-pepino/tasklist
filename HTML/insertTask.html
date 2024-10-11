@@ -20,7 +20,8 @@
         <input name="datelimit" id="data" type="date"/>
         </label>
         <br>
-        <input type="submit" id="finish" value="Terminar" onclick="addTask()" onsubmit="location.href('../html/index.html')"/>
+        <input type="submit" id="finish" value="Añadir" onclick="addTask(false)" onsubmit="location.href('../html/index.html')"/>
+        <input type="submit" id="finish" value="Añadir Y Volver" onclick="addTask(true)" onsubmit="location.href('../html/index.html')"/>
     </form>
     <script type="text/javascript" src="../Javascript/script.js"></script>
 </body>

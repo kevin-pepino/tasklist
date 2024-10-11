@@ -184,7 +184,7 @@ function loadSubEdit()
 }
 
 //ADD TASK TO THE LIST
-function addTask()
+function addTask(value)
 {
     let list = [];
     if(tasksLS != null){list = JSON.parse(tasksLS);}            
@@ -209,8 +209,8 @@ function addTask()
     {
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
     }
+    if(value){document.forms['form'].action = '../HTML/index.html';''}
 }
 
 //CHANGE THE DISPLAY OF DATELIMIT
@@ -277,11 +277,17 @@ function editTask()
     else
     {
         JSON.parse(tasksLS).forEach(element => {
-            if(element.id == idLS)
+            if(element.id == idLS && 
+               (element.title != document.forms['form']['newTitle'].value ||
+               element.datelimit != document.forms['form']['newDate'].value))
             {
                 
                 element.title = document.forms['form']['newTitle'].value;
                 element.datelimit = document.forms['form']['newDate'].value;
+                element.isFinished = false;
+                element.sublist.forEach(subelement => {
+                    subelement.subFinished = false;
+                });
             }
             list.push(element)
         });
@@ -375,7 +381,7 @@ function moveDown(id)
 }
 
 //ADD A SUBTASK WITHIN A TASK
-function addSubTask()
+function addSubTask(value)
 {
     let list = JSON.parse(tasksLS);
     console.log(list);
@@ -401,10 +407,11 @@ function addSubTask()
             {
                 console.log('flag');
                 element.sublist.push(item);
+                element.isFinished = false;
             }
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        location.href = '../HTML/index.html';
+        if(value){document.forms['form'].action = '../HTML/index.html';}
     }
 }
 
@@ -445,10 +452,17 @@ function editSubTask()
             {
                 element.sublist.forEach(subelement =>
                 {
-                    if(subelement.subId == idLS.split(',')[1])
+                    if(subelement.subId == idLS.split(',')[1] &&
+                      (subelement.subTitle != document.forms['form']['newTitle'].value ||
+                       subelement.subDate != document.forms['form']['newDate'].value))
                     {
                         subelement.subTitle = document.forms['form']['newTitle'].value;
                         subelement.subDate = document.forms['form']['newDate'].value;
+                        subelement.subFinished = false;
+                    }
+                    if(!subelement.subFinished)
+                    {
+                        element.isFinished = false;
                     }
                 });
             }
