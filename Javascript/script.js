@@ -312,14 +312,8 @@ function finishTask(id)
 //UPDATE A TASK WITH NEW INFO
 function editTask()
 {
-    document.forms["form"].addEventListener("submit", function(event) {
-        event.preventDefault();
-    
     let list = [];
     if(document.forms['form']['newTitle'].value == ''){alert('El titulo no puede estar vacío.');}
-    
-       
-
     else if(document.forms['form']['newDate'].value == ''){alert('La fecha no puede estar vacía.');}
     else
     {
@@ -341,7 +335,6 @@ function editTask()
         localStorage.setItem('tasks', JSON.stringify(list));
         document.forms['form'].action = '../HTML/index.html';
     }
-})
 }
 
 //DELETE A SPECIFIC TASK
