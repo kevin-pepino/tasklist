@@ -238,6 +238,16 @@ function addTask(value)
         saveValues()
     }
     else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+    let isDuplicate=list.some(task=>task.title===title && task.datelimit===datelimit);
+    if(isDuplicate){
+        if(confirm("Deseas agregar esta tarea con datos existentes?")==true){
+            list.push(item);
+            localStorage.setItem('tasks', JSON.stringify(list));
+            localStorage.removeItem('backup');
+            if(value){document.forms['form'].action = '../HTML/index.html';''}
+        }else(saveValues);
+    }
+
     else
     {
         list.push(item);
@@ -245,6 +255,7 @@ function addTask(value)
         localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';''}
     }
+    
 }
 
 //SAVE VALUES TITLE DATE
