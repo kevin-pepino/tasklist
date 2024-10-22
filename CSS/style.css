@@ -313,3 +313,7 @@ h1{
 #subtrue{
     background-color: rgb(39, 99, 39); 
 }
+.subtrue p, .subfalse p, .taskfalse p, .tasktrue p{
+    text-align: center;
+    margin: auto;
+}
