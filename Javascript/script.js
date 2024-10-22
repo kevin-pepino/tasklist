@@ -239,8 +239,10 @@ function addTask(value)
         saveValues()
     }
     else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
-    let isDuplicate=list.some(task=>task.title===title && task.datelimit===datelimit);
-    if(isDuplicate){
+    else
+    {
+        let isDuplicate=list.some(task=>task.title===title && task.datelimit===datelimit);
+        if(isDuplicate){
         if(confirm("Deseas agregar esta tarea con datos existentes?")==true){
             list.push(item);
             localStorage.setItem('tasks', JSON.stringify(list));
@@ -255,6 +257,7 @@ function addTask(value)
         localStorage.setItem('tasks', JSON.stringify(list));
         localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';''}
+    }
     }
     
 }
