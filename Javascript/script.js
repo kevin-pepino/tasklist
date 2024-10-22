@@ -502,13 +502,14 @@ function addSubTask(value)
     }
 }
 
-//DELETE SUBTASK
+//DELETE SUBTASK. IF ALL SUBTASKS ARE FINISHED, SO WILL THE MAIN TASK
 function deleteSubTask(id, subId)
 {
     if(confirm('Desea eliminar esta subtarea?'))
     {
         let list = JSON.parse(tasksLS);
         let newList = [];
+        let trueCounter = 0;
         list.forEach(element => {
             if(element.id == id)
             {
@@ -516,8 +517,13 @@ function deleteSubTask(id, subId)
                     if(subelement.subId != subId)
                     {
                         newList.push(subelement);
+                        if(subelement.subFinished){subelement.subFinished = true;}
+                        else{subelement.subFinished = false;}
                     }
+                    if(subelement.subFinished){trueCounter++;}
                 });
+                if(trueCounter == element.sublist.length-1){element.isFinished = true;}
+                else{element.isFinished = false;}
                 element.sublist = newList;
             }
         });
@@ -526,7 +532,8 @@ function deleteSubTask(id, subId)
     }
 }
 
-//EDIT THE NEW DATA FOR THE SUBTASK
+
+//SAVE THE NEW DATA FOR THE SUBTASK
 function editSubTask()
 {
     let list = [];
