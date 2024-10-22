@@ -15,15 +15,12 @@ const tasksHTML = document.getElementById('tasks');
 const tasksLS = localStorage.getItem('tasks');      //ALL TASKS SAVED
 const idLS = localStorage.getItem('id');          //ID SHARED ACROSS PAGES
 
-
-
 //FOR LOCAL STORAGE WIPE
 function fullwipe()
 {
     localStorage.clear();
     location.reload();
 }
-
 function fullStorageWipe()
 {
     if(confirm('Desea eliminar todas las tareas?'))
@@ -677,11 +674,12 @@ function importData()
     {
         data.forEach(element => 
         {
-            if(element.id != null || element.title != null || element.datelimit != null)
+            console.log(element.id + ', ' + element.title + ', ' + element.datelimit);
+            if(element.id != undefined && element.title != undefined && element.datelimit != undefined && dateValidate(element.datelimit))
             {
                 element.sublist.forEach(subelement =>
                 {
-                    if(subelement.subId != null || subelement.subTitle != null || subelement.subDate != null)
+                    if(subelement.subId != undefined && subelement.subTitle != undefined && subelement.subDate != undefined && dateValidate(subelement.subDate))
                     {
                         sublist.push(subelement);
                     }
@@ -689,7 +687,26 @@ function importData()
                 list.push(element);
             };
         });
-        localStorage.setItem('tasks', JSON.stringify(list));
-        location.reload();
+        if(confirm(`Se importarán ${list.length} tareas.`))
+        {
+            localStorage.setItem('tasks', JSON.stringify(list));
+            localStorage.setItem('import', true);
+            location.reload();
+        }
     });
+}
+
+function dateValidate(date)
+{
+    dt = new Date(date)
+    year = dt.getFullYear()
+    month = dt.getMonth() + 1;
+    day = dt.getDay()
+    
+    if(month < 1 || month > 12 || day < 1 || day > 31){return false}
+    else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){return false}
+    else if(year % 4 == 0 && month == 2 && day > 29){return false;}
+    else if(month == 2 && day > 28){return false;}
+    
+    return true;
 }
