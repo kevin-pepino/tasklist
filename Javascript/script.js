@@ -218,7 +218,7 @@ function addTask(value)
     let datelimit = document.forms['form']['datelimit'].value;  //DATE LIMIT
     let timestamp = today();                                    //TIME STAMP OF WHEN IT WAS CREATED
     let isFinished = false;                                     //TASK STATUS, SET AS INCOMPLETE (FALSE)
-    
+
     const item = {
         id: id,
         title: title,
@@ -227,7 +227,8 @@ function addTask(value)
         isFinished: isFinished,
         sublist: []
     };
-    if(title.trim() === '')
+    if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+    else if(title.trim() === '')
     {
         alert('El titulo no puede estar vacío.');
         saveValues()
@@ -237,7 +238,11 @@ function addTask(value)
         alert('La fecha no puede estar vacía.');
         saveValues()
     }
-    else if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+    else if(offScriptVerify(title))
+    {
+        alert("No se permiten los valores '<' o '>'");
+        saveValues();
+    }
     else
     {
         list.push(item);
@@ -245,6 +250,19 @@ function addTask(value)
         localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';''}
     }
+}
+
+//VERIFY IF "<" IS PRESENT
+function offScriptVerify(title)
+{
+    for(i = 0; i < title.length; i++)
+    {
+        if(title[i] == '>' || title[i] == '<')
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 //SAVE VALUES TITLE DATE
@@ -313,8 +331,10 @@ function finishTask(id)
 function editTask()
 {
     let list = [];
-    if(document.forms['form']['newTitle'].value == ''){alert('El titulo no puede estar vacío.');}
+    if(document.forms['form']['newTitle'].value.trim() === '' && document.forms['form']['newDate'].value == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+    else if(document.forms['form']['newTitle'].value.trim() === ''){alert('El titulo no puede estar vacío.');}
     else if(document.forms['form']['newDate'].value == ''){alert('La fecha no puede estar vacía.');}
+    else if(offScriptVerify(document.forms['form']['newTitle'].value)){alert("No se permiten los valores '<' o '>'")}
     else
     {
         JSON.parse(tasksLS).forEach(element => {
@@ -439,7 +459,8 @@ function addSubTask(value)
         subFinished: subFinished
     };
     console.log(item);
-    if(subTitle == '')
+    if(subTitle.trim() === '' && subDate == ''){alert('La fecha y el titulo no pueden estar vacíos.')}
+    else if(subTitle.trim() === '')
     {
         alert('El titulo no puede estar vacío.');
         saveValues()
@@ -448,6 +469,11 @@ function addSubTask(value)
     {
         alert('La fecha no puede estar vacía.');
         saveValues()
+    }
+    else if(offScriptVerify(subTitle))
+    {
+        alert("No se permiten los valores '<' o '>'");
+        saveValues();
     }
     else
     {
@@ -488,12 +514,14 @@ function deleteSubTask(id, subId)
     }
 }
 
-//SAVE THE NEW DATA FOR THE SUBTASK
+//EDIT THE NEW DATA FOR THE SUBTASK
 function editSubTask()
 {
     let list = [];
-    if(document.forms['form']['newTitle'].value == ''){alert('El titulo no puede estar vacío.');}
+    if(document.forms['form']['newTitle'].value.trim() === '' && document.forms['form']['newDate'].value == ''){alert('La fecha y el titulo no pueden estar vacíos.')}
+    else if(document.forms['form']['newTitle'].value.trim() === ''){alert('El titulo no puede estar vacío.');}
     else if(document.forms['form']['newDate'].value == ''){alert('La fecha no puede estar vacía.');}
+    else if(offScriptVerify(document.forms['form']['newTitle'].value)){alert("No se permiten los valores '<' o '>'");}
     else
     {
         JSON.parse(tasksLS).forEach(element => {
