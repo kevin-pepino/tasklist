@@ -494,10 +494,12 @@ function addSubTask(value)
             {
                 console.log('flag');
                 element.sublist.push(item);
+                localStorage.removeItem('backup');
                 element.isFinished = false;
             }
         });
         localStorage.setItem('tasks', JSON.stringify(list));
+        localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';}
     }
 }
@@ -522,7 +524,7 @@ function deleteSubTask(id, subId)
                     }
                     if(subelement.subFinished){trueCounter++;}
                 });
-                if(trueCounter == element.sublist.length-1){element.isFinished = true;}
+                if(trueCounter == element.sublist.length-1 && trueCounter != 0){element.isFinished = true;}
                 else{element.isFinished = false;}
                 element.sublist = newList;
             }
