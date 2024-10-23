@@ -524,7 +524,7 @@ function deleteSubTask(id, subId)
                     }
                     if(subelement.subFinished){trueCounter++;}
                 });
-                if(trueCounter == element.sublist.length-1 && trueCounter != 0){element.isFinished = true;}
+                if(trueCounter == element.sublist.length-1 && trueCounter != 0 || element.isFinished == true){element.isFinished = true;}
                 else{element.isFinished = false;}
                 element.sublist = newList;
             }
