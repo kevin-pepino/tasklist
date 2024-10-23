@@ -82,6 +82,8 @@ function loadList()
         tasksHTML.innerHTML += `
             <div id='taskTitles' class='taskTitles'>                
                 <button id="addTask" class="addTask" onclick="addTaskRedirect()"></button>
+                <button id="orden-alfa" class="alfabeto" onclick="sortByTitle()"></button>
+                <button id="orden-fecha" class="fecha" onclick="sortByDate()"></button>
                 <button id="export" class="export" onclick="exportData()">Exportar</button>
                 <button id="import" class="import" onclick="importData()">Importar</button>
                 <div></div>
@@ -722,18 +724,21 @@ function importData()
         }
     });
 }
-
-function dateValidate(date)
-{
-    dt = new Date(date)
-    year = dt.getFullYear()
-    month = dt.getMonth() + 1;
-    day = dt.getDay()
-    
-    if(month < 1 || month > 12 || day < 1 || day > 31){return false}
-    else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){return false}
-    else if(year % 4 == 0 && month == 2 && day > 29){return false;}
-    else if(month == 2 && day > 28){return false;}
-    
-    return true;
+// ORDEN ALFABÉTICO
+function sortByTitle() {
+    if (tasksLS) { // Verifica si hay tareas almacenadas en localStorage
+        let list = JSON.parse(tasksLS); // Convierte la cadena JSON a un objeto de JavaScript
+        list.sort((a, b) => a.title.localeCompare(b.title)); // Ordena las tareas por título
+        localStorage.setItem('tasks', JSON.stringify(list)); // Guarda la lista ordenada en localStorage
+        location.reload(); // Recarga la página para mostrar las tareas ordenadas
+    }
+}
+// ORDEN POR FECHA
+function sortByDate() {
+    if (tasksLS) { // Verifica si hay tareas en localStorage
+        let list = JSON.parse(tasksLS); // Convierte las tareas guardadas a objetos JavaScript
+        list.sort((a, b) => new Date(a.datelimit) - new Date(b.datelimit)); // Ordena las tareas por fecha
+        localStorage.setItem('tasks', JSON.stringify(list)); // Guarda la lista ordenada
+        location.reload(); // Recarga la página para mostrar las tareas ordenadas
+    }
 }
