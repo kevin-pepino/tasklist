@@ -6,11 +6,13 @@
         "sublist": [
             {
                 "subTitle": "1",
-                "subDate": "2012-12-12"
+                "subDate": "2012-12-12",
+                "subFinished": true
             },
             {
                 "subTitle": "fff",
-                "subDate": "2017-07-27"
+                "subDate": "2017-07-27",
+                "subFinished": true
             }
         ]
     },

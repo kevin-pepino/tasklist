@@ -700,6 +700,7 @@ function importData()
     let list = [];
     let sub = [];
     let subCounter = 0;
+    let subTrue = 0;
     fetch('../JSON/data.json')
     .then((response) => response.json())
     .then((data) => 
@@ -707,6 +708,7 @@ function importData()
         data.forEach(element => 
         {
             sub = [];
+            subTrue = 0;
             element.id = Math.floor(Math.random(0, 1) * 10000000000);
             element.timestamp = today();
             if(element.isFinished == undefined){element.isFinished = false;}
@@ -726,9 +728,11 @@ function importData()
                             {
                                 sub.push(subelement);
                                 subCounter++;
+                                if(subelement.subFinished){subTrue++;}
                             }
                         }
                     });
+                    if(element.sublist.length == subTrue){element.isFinished = true;}
                     element.sublist = sub;
                     list.push(element);
                 }
