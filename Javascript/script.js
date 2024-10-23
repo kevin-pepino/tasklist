@@ -714,7 +714,7 @@ function importData()
             if(element.isFinished == undefined){element.isFinished = false;}
             if(element.title != undefined && element.datelimit != undefined)
             {
-                if(dateValidate(element.datelimit))
+                if(dateValidate(element.datelimit) && !offScriptVerify(element.title))
                 {
                     element.sublist.forEach(subelement =>
                     {
@@ -724,7 +724,7 @@ function importData()
                         else if(subelement.subFinished == undefined){subelement.subFinished = false;}
                         if(subelement.subTitle != undefined && subelement.subDate != undefined)
                         {
-                            if(dateValidate(subelement.subDate))
+                            if(dateValidate(subelement.subDate) && !offScriptVerify(subelement.subTitle))
                             {
                                 sub.push(subelement);
                                 subCounter++;
