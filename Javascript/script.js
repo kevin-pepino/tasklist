@@ -686,7 +686,7 @@ function exportData()
   link.click();
 }
 
-//
+//IMPORTS DATA FROM A JSON FILE
 
 function importData()
 {
