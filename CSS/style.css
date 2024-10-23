@@ -54,7 +54,7 @@
 .taskTitles
 {
     display: grid;
-    grid-template-columns: 5% 20% 20% 8.5% 18% 9% 13% 5%;
+    grid-template-columns: 5% 20% 20% 8.5% 18% 9% 5% 5% 13% 5%;
 }
 
 .taskfalse, .tasktrue
@@ -312,4 +312,28 @@ h1{
 }
 #subtrue{
     background-color: rgb(39, 99, 39); 
+}
+.orden-alfa{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/alphaFilter.png');
+    background-size: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.orden-alfa:hover{
+    background-image:url('../img/alphaHover.png'); ;
+}
+.orden-fecha{
+    background-color: transparent;
+    border-style: none;
+    background-image: url('../img/dateFilter.png');
+    background-size: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.orden-fecha:hover{
+    background-image: url('../img/dateHover.png');
 }

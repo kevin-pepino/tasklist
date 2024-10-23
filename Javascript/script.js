@@ -90,6 +90,8 @@ function loadList()
                 <div></div>
                 <p>Fecha Limite</p>
                 <p>Estado</p>
+                <button id="orden-alfa" class="alfabeto" onclick="sortByTitle()">
+                <button id="orden-fecha" class="fecha" onclick="sortByDate()">
                 <div></div>
                 <button id="fullwipe" class="fullwipe" onclick="fullStorageWipe()"></button>
             </div>
