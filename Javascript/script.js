@@ -111,7 +111,7 @@ function loadList()
             }
             tasksHTML.innerHTML += `
             <div id='${taskid}' class='${taskid}'>
-            <div id='scroll' class='scroll'>
+                <div id='scroll' class='scroll'>
                     <button id='btnup' class='btnup' onclick='moveUp(${list[i].id})'></button>
                     <button id='btndown'class='btndown' onclick='moveDown(${list[i].id})'></button>
                 </div>
@@ -461,6 +461,7 @@ function addSubTask(value)
     let subId = Math.floor(Math.random(0, 1) * 10000000000);
     let subTitle = document.forms['form']['title'].value;  
     let subDate = document.forms['form']['datelimit'].value;
+    let subStamp = today();
     let subFinished = false;
 
     const item =
@@ -468,6 +469,7 @@ function addSubTask(value)
         subId: subId,
         subTitle: subTitle,
         subDate: subDate,
+        subStamp: subStamp,
         subFinished: subFinished
     };
     console.log(item);
@@ -689,27 +691,58 @@ function exportData()
 function importData()
 {
     let list = [];
-    let sublist = [];
+    let sub = [];
+    let subCounter = 0;
     fetch('../JSON/data.json')
     .then((response) => response.json())
     .then((data) => 
     {
         data.forEach(element => 
         {
-            console.log(element.id + ', ' + element.title + ', ' + element.datelimit);
-            if(element.id != undefined && element.title != undefined && element.datelimit != undefined && dateValidate(element.datelimit))
+            sub = [];
+            element.id = Math.floor(Math.random(0, 1) * 10000000000);
+            element.timestamp = today();
+            if(element.isFinished == undefined){element.isFinished = false;}
+            if(element.title != undefined && element.datelimit != undefined)
             {
-                element.sublist.forEach(subelement =>
+                if(dateValidate(element.datelimit))
                 {
-                    if(subelement.subId != undefined && subelement.subTitle != undefined && subelement.subDate != undefined && dateValidate(subelement.subDate))
+                    element.sublist.forEach(subelement =>
                     {
-                        sublist.push(subelement);
-                    }
-                });
-                list.push(element);
+                        subelement.subId = Math.floor(Math.random(0, 1) * 10000000000);
+                        subelement.subStamp = today();
+                        if(element.isFinished){subelement.subFinished = true;}
+                        else if(subelement.subFinished == undefined){subelement.subFinished = false;}
+                        if(subelement.subTitle != undefined && subelement.subDate != undefined)
+                        {
+                            if(dateValidate(subelement.subDate))
+                            {
+                                sub.push(subelement);
+                                subCounter++;
+                            }
+                        }
+                    });
+                    element.sublist = sub;
+                    list.push(element);
+                }
             };
         });
-        if(confirm(`Se importarán ${list.length} tareas.`))
+
+        let prompt;
+        if(list.length == 0){alert('No se ha importado ninguna tarea.')}
+        else if(list.length == 1)
+        {
+            if(subCounter == 0){prompt = 'Se importará 1 tarea.'}
+            else if(subCounter == 1){prompt = 'Se importará 1 tarea y 1 subtarea'}
+            else{prompt = `Se importará 1 tarea y ${subCounter} subtareas.`;}
+        }
+        else
+        {
+            if(subCounter == 0){prompt = `Se importarán ${list.length} tareas.`}
+            else if(subCounter == 1){prompt = `Se importarán ${list.length} tareas y 1 subtarea`;}
+            else{prompt = `Se importarán ${list.length} tareas y ${subCounter} subtareas.`;}
+        }
+        if(confirm(prompt))
         {
             localStorage.setItem('tasks', JSON.stringify(list));
             localStorage.setItem('import', true);
@@ -720,13 +753,13 @@ function importData()
 
 function dateValidate(date)
 {
-    dt = new Date(date)
-    year = dt.getFullYear()
-    month = dt.getMonth() + 1;
-    day = dt.getDay()
-    
-    if(month < 1 || month > 12 || day < 1 || day > 31){return false}
-    else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){return false}
+    if(date.split('-').length < 3){return false;}
+    year = parseInt(date.split('-')[0]);
+    month = parseInt(date.split('-')[1]);
+    day = parseInt(date.split('-')[2]);
+
+    if(month < 1 || month > 12 || day < 1 || day > 31){return false;}
+    else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){return false;}
     else if(year % 4 == 0 && month == 2 && day > 29){return false;}
     else if(month == 2 && day > 28){return false;}
     

@@ -1,40 +1,33 @@
 [
     {
-        "id": 2404637820,
         "title": "okok",
-        "datelimit": "2024-10-22",
-        "timestamp": "4/10/2024",
+        "datelimit": "2024-3-30",
         "isFinished": false,
         "sublist": [
             {
-                "subId": 1414771694,
                 "subTitle": "1",
-                "subDate": "2024-10-11",
-                "subFinished": false
+                "subDate": "2012-12-12"
+            },
+            {
+                "subTitle": "fff",
+                "subDate": "2017-07-27"
             }
         ]
     },
     {
-        "id": 4553369319,
         "title": "sas",
         "datelimit": "2024-12-20",
-        "timestamp": "4/10/2024",
-        "isFinished": false,
         "sublist": [
             {
-                "subId": 1414771694,
                 "subTitle": "1.1",
                 "subDate": "2024-10-11",
-                "subFinished": false
+                "subFinished": true
             },
             {
-                "subId": 413636805,
                 "subTitle": "3",
-                "subDate": "2024-12-01",
-                "subFinished": false
+                "subDate": "2024-12-01"
             },
             {
-                "subId": 4594922093,
                 "subTitle": "2",
                 "subDate": "2024-10-18",
                 "subFinished": false
