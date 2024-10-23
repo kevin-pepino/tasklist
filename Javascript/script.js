@@ -82,6 +82,8 @@ function loadList()
         tasksHTML.innerHTML += `
             <div id='taskTitles' class='taskTitles'>                
                 <button id="addTask" class="addTask" onclick="addTaskRedirect()"></button>
+                <button id="orden-alfa" class="alfabeto" onclick="sortByTitle()"></button>
+                <button id="orden-fecha" class="fecha" onclick="sortByDate()"></button>
                 <button id="export" class="export" onclick="exportData()">Exportar</button>
                 <button id="import" class="import" onclick="importData()">Importar</button>
                 <div></div>
@@ -226,6 +228,7 @@ function addTask(value)
         sublist: []
     };
     if(title.trim() == '' && datelimit == ''){alert('La fecha y el titulo no pueden estar vacíos.');}
+    
     else if(title.trim() === '')
     {
         alert('El titulo no puede estar vacío.');
@@ -463,7 +466,6 @@ function addSubTask(value)
     let subDate = document.forms['form']['datelimit'].value;
     let subStamp = today();
     let subFinished = false;
-
     const item =
     {
         subId: subId,
@@ -473,8 +475,11 @@ function addSubTask(value)
         subFinished: subFinished
     };
     console.log(item);
-    if(subTitle.trim() === '' && subDate == ''){alert('La fecha y el titulo no pueden estar vacíos.')}
-    else if(subTitle.trim() === '')
+    if (subTitle.trim() == '' && subDate == ''){
+        alert('El titulo y la fecha no pueden estar vacíos');
+        saveValues()
+    }
+    else if(subTitle.trim() == '')
     {
         alert('El titulo no puede estar vacío.');
         saveValues()
@@ -496,10 +501,12 @@ function addSubTask(value)
             {
                 console.log('flag');
                 element.sublist.push(item);
+                localStorage.removeItem('backup');
                 element.isFinished = false;
             }
         });
         localStorage.setItem('tasks', JSON.stringify(list));
+        localStorage.removeItem('backup');
         if(value){document.forms['form'].action = '../HTML/index.html';}
     }
 }
@@ -524,7 +531,7 @@ function deleteSubTask(id, subId)
                     }
                     if(subelement.subFinished){trueCounter++;}
                 });
-                if(trueCounter == element.sublist.length-1){element.isFinished = true;}
+                if(trueCounter == element.sublist.length-1 && trueCounter != 0 || element.isFinished == true){element.isFinished = true;}
                 else{element.isFinished = false;}
                 element.sublist = newList;
             }
@@ -764,4 +771,25 @@ function dateValidate(date)
     else if(month == 2 && day > 28){return false;}
     
     return true;
+}
+
+// ORDEN ALFABÉTICO
+function sortByTitle() {
+    if (tasksLS) { // Verifica si hay tareas almacenadas en localStorage
+        let list = JSON.parse(tasksLS); // Convierte la cadena JSON a un objeto de JavaScript
+        list.sort((a, b) => a.title.localeCompare(b.title)); // Ordena las tareas por título
+        localStorage.setItem('tasks', JSON.stringify(list)); // Guarda la lista ordenada en localStorage
+        location.reload(); // Recarga la página para mostrar las tareas ordenadas
+    }
+}
+// ORDEN POR FECHA
+function sortByDate() 
+{
+    if (tasksLS) 
+    { // Verifica si hay tareas en localStorage
+        let list = JSON.parse(tasksLS); // Convierte las tareas guardadas a objetos JavaScript
+        list.sort((a, b) => new Date(a.datelimit) - new Date(b.datelimit)); // Ordena las tareas por fecha
+        localStorage.setItem('tasks', JSON.stringify(list)); // Guarda la lista ordenada
+        location.reload(); // Recarga la página para mostrar las tareas ordenadas
+    }
 }
