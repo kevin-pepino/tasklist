@@ -335,3 +335,7 @@ h1{
 #orden-fecha:hover{
     background-image: url('../img/dateHover.png');
 }
+.taskfalse p, .tasktrue p, .subfalse p, .subtrue p{
+    margin: auto;
+    word-break: break-all;
+}
