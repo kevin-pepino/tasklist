@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Task</title>
-    <link rel="icon" href="./img/7445633.png">
-    <link rel="stylesheet" href="./CSS/style.css"/>
+    <title>Insertar Sub Tarea</title>
+    <link rel="icon" href="../img/7445633.png">
+    <link rel="stylesheet" href="../CSS/style.css"/>
 </head>
 <body onload="loadAdd()">
     <div id="redirects" class="redirects">
         <button id="taskList" class="taskList" onclick="taskListRedirect()"></button>
     </div>
-    <h1>Añadir Tarea</h1>
+    <h1>Añadir Subtarea</h1>
     <form name="form">
         <label>Titulo
         <input name="title" class="nwTitle" id="nwTitle" type="text" placeholder="Titulo"/>
@@ -21,9 +21,9 @@
         <input name="datelimit" class="nwDate" id="nwDate" type="date"/>
         </label>
         <br>
-        <input type="submit" class="finish" id="finish" value="Añadir" onclick="addTask(false)" onsubmit="location.href('../html/index.html')"/>
-        <input type="submit" class="finish" id="finish" value="Añadir Y Volver" onclick="addTask(true)" onsubmit="location.href('../html/index.html')"/>
+        <input type="submit" class="finish" id="finish" value="Añadir" onclick="addSubTask(false)"/>
+        <input type="submit" class="finish" id="finish" value="Añadir Y Volver" onclick="addSubTask(true)"/>
     </form>
-    <script type="text/javascript" src="./Javascript/script.js"></script>
+    <script type="text/javascript" src="../Javascript/script.js"></script>
 </body>
 </html>
