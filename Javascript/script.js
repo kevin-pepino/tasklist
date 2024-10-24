@@ -34,28 +34,28 @@ function fullStorageWipe()
 function addTaskRedirect()
 {
     localStorage.removeItem('backup');
-    location.href = './HTML/insertTask.html';
+    location.href = './insertTask.html';
 }
 function taskListRedirect()
 {
     localStorage.removeItem('backup');
-    location.href = '../index.html';
+    location.href = './index.html';
 }
 function editTaskRedirect(id)
 {
     localStorage.setItem('id', id);
-    location.href = './HTML/editTask.html';
+    location.href = './editTask.html';
 }
 function addSubRedirect(id)
 {
     localStorage.setItem('id', id);
-    location.href = './HTML/insertSubTask.html';
+    location.href = './insertSubTask.html';
 }
 function editSubRedirect(id, subId)
 {
     let values = [id, subId];
     localStorage.setItem('id', values);
-    location.href = './HTML/editSubTask.html';
+    location.href = './editSubTask.html';
 }
 
 //GENERATE LIST ON MAIN PAGE
@@ -252,7 +252,7 @@ function addTask(value)
             list.push(item);
             localStorage.setItem('tasks', JSON.stringify(list));
             localStorage.removeItem('backup');
-            if(value){document.forms['form'].action = '../index.html';''}
+            if(value){document.forms['form'].action = './index.html';''}
         }else(saveValues);
     }
 
@@ -261,7 +261,7 @@ function addTask(value)
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
         localStorage.removeItem('backup');
-        if(value){document.forms['form'].action = '../index.html';''}
+        if(value){document.forms['form'].action = './index.html';''}
     }
     }
     
@@ -368,7 +368,7 @@ function editTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        document.forms['form'].action = '../index.html';
+        document.forms['form'].action = './index.html';
     }
 }
 
@@ -507,7 +507,7 @@ function addSubTask(value)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
         localStorage.removeItem('backup');
-        if(value){document.forms['form'].action = '../index.html';}
+        if(value){document.forms['form'].action = './index.html';}
     }
 }
 
@@ -574,7 +574,7 @@ function editSubTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        document.forms['form'].action = '../index.html';
+        document.forms['form'].action = './index.html';
     }
 }
 
@@ -701,7 +701,7 @@ function importData()
     let sub = [];
     let subCounter = 0;
     let subTrue = 0;
-    fetch('../JSON/data.json')
+    fetch('./JSON/data.json')
     .then((response) => response.json())
     .then((data) => 
     {
