@@ -94,7 +94,7 @@ body{
 h1,.txt,.taskTitles,.taskfalse, .tasktrue, .subfalse, .subtrue{
     color: white;
     font-family: Arial;
-    margin: auto;
+
     
     
 }
@@ -107,6 +107,7 @@ h1,.txt,.taskTitles,.taskfalse, .tasktrue, .subfalse, .subtrue{
     border-style: solid;
     border-color: white;
     text-align: center; 
+    margin: auto;
 }
 
 .tasktrue
@@ -337,3 +338,6 @@ h1{
     background-image: url('../img/dateHover.png');
 }
 
+.taskfalse p, .tasktrue p, .subfalse p, .subtrue p{
+    margin: auto;
+}
