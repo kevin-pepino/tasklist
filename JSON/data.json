@@ -1,7 +1,7 @@
 [
     {
         "title": "okok",
-        "datelimit": "2024-3-30",
+        "datelimit": "2024-2-28",
         "sublist": [
             {
                 "subTitle": "1",
@@ -21,7 +21,7 @@
             {
                 "subTitle": "1.1",
                 "subDate": "2024-10-11",
-                "subFinished": true,
+                "subFinished": false,
                 "subId": 3782712026,
                 "subStamp": "24/10/2024"
             },
@@ -49,6 +49,6 @@
         ],
         "id": 190374017,
         "timestamp": "24/10/2024",
-        "isFinished": false
+        "isFinished": true
     }
 ]

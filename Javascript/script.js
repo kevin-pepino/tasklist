@@ -39,7 +39,7 @@ function addTaskRedirect()
 function taskListRedirect()
 {
     localStorage.removeItem('backup');
-    location.href = '../HTML/index.html';
+    location.href = '../index.html';
 }
 function editTaskRedirect(id)
 {
@@ -252,7 +252,7 @@ function addTask(value)
             list.push(item);
             localStorage.setItem('tasks', JSON.stringify(list));
             localStorage.removeItem('backup');
-            if(value){document.forms['form'].action = '../HTML/index.html';''}
+            if(value){document.forms['form'].action = '../index.html';''}
         }else(saveValues);
     }
 
@@ -261,7 +261,7 @@ function addTask(value)
         list.push(item);
         localStorage.setItem('tasks', JSON.stringify(list));
         localStorage.removeItem('backup');
-        if(value){document.forms['form'].action = '../HTML/index.html';''}
+        if(value){document.forms['form'].action = '../index.html';''}
     }
     }
     
@@ -368,7 +368,7 @@ function editTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        document.forms['form'].action = '../HTML/index.html';
+        document.forms['form'].action = '../index.html';
     }
 }
 
@@ -507,7 +507,7 @@ function addSubTask(value)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
         localStorage.removeItem('backup');
-        if(value){document.forms['form'].action = '../HTML/index.html';}
+        if(value){document.forms['form'].action = '../index.html';}
     }
 }
 
@@ -574,7 +574,7 @@ function editSubTask()
             list.push(element)
         });
         localStorage.setItem('tasks', JSON.stringify(list));
-        document.forms['form'].action = '../HTML/index.html';
+        document.forms['form'].action = '../index.html';
     }
 }
 
