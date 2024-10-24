@@ -34,7 +34,7 @@ function fullStorageWipe()
 function addTaskRedirect()
 {
     localStorage.removeItem('backup');
-    location.href = '../HTML/insertTask.html';
+    location.href = './HTML/insertTask.html';
 }
 function taskListRedirect()
 {
@@ -44,18 +44,18 @@ function taskListRedirect()
 function editTaskRedirect(id)
 {
     localStorage.setItem('id', id);
-    location.href = '../HTML/editTask.html';
+    location.href = './HTML/editTask.html';
 }
 function addSubRedirect(id)
 {
     localStorage.setItem('id', id);
-    location.href = '../HTML/insertSubTask.html';
+    location.href = './HTML/insertSubTask.html';
 }
 function editSubRedirect(id, subId)
 {
     let values = [id, subId];
     localStorage.setItem('id', values);
-    location.href = '../HTML/editSubTask.html';
+    location.href = './HTML/editSubTask.html';
 }
 
 //GENERATE LIST ON MAIN PAGE
