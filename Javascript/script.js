@@ -732,7 +732,7 @@ function importData()
                             }
                         }
                     });
-                    if(element.sublist.length == subTrue){element.isFinished = true;}
+                    if(element.sublist.length == subTrue && element.sublist.length >= 1){element.isFinished = true;}
                     element.sublist = sub;
                     list.push(element);
                 }
